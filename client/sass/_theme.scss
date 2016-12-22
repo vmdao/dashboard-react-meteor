@@ -1,0 +1,28 @@
+/* ADD/REMOVE/CHANGE THEMES HERE */
+
+// Giving the default theme a name
+@include theme-maker("default", (
+  header (
+    bg #d3d8db,
+	color #363f44,
+	logout (
+	  bg #363f44,
+	  hover-bg #31C0A3
+	),
+  ),
+   sidebar (
+    bg #363f44,
+	avatar (
+	  bg #363f44
+	),
+	controls (
+	  bg #363f44,
+	  btn (
+		color #1B6858,
+		border darken(#279982, 2%),
+		active-bg #3f4a4e,
+		active-color #ffffff
+	  )
+	)
+  )
+));
