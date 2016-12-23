@@ -7,20 +7,13 @@ import {
     Col,
     Grid,
     Panel,
-    Alert,
     PanelBody,
     PanelContainer,
 } from '@sketchpixy/rubix';
 
-import { LogoCategories } from '../../api/LogoCategories';
 import CategoryCreate from '../../components/backend/category/CategoryCreate';
 
-
-class LogoCategoryAddPage extends Component {
-    static propTypes = {
-        categories: React.PropTypes.array.isRequired,
-    };
-
+class LogoCategoryCreatePage extends Component {
     render() {
         return (
             <PanelContainer>
@@ -29,7 +22,7 @@ class LogoCategoryAddPage extends Component {
                         <Grid>
                             <Row>
                                 <Col xs={12}>
-                                    <h3>Categories List:</h3>
+                                    <h3>Add New Category</h3>
                                     <CategoryCreate />
                                 </Col>
                             </Row>
@@ -41,10 +34,4 @@ class LogoCategoryAddPage extends Component {
     }
 }
 
-export default createContainer(() => {
-    Meteor.subscribe('logoCategories');
-    const categories = LogoCategories.find({}).fetch() || [];
-    return {
-        categories: categories,
-    };
-}, LogoCategoryAddPage);
+export default LogoCategoryCreatePage;

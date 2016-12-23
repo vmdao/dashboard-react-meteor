@@ -10,12 +10,16 @@ import Header from './common/header';
 import Footer from './common/footer';
 
 /* Pages */
-import AllTodos from './routes/AllTodos';
-import EditTodo from './routes/EditTodo';
+import Home from './routes/Home';
+
 
 import LogoCategoryListPage from './routes/category/LogoCategoryListPage';
-import LogoCategoryAddPage from './routes/category/LogoCategoryAddPage';
+import LogoCategoryCreatePage from './routes/category/LogoCategoryCreatePage';
 import LogoCategoryEditPage from './routes/category/LogoCategoryEditPage';
+
+import LogoStyleListPage from './routes/style/LogoStyleListPage';
+import LogoStyleCreatePage from './routes/style/LogoStyleCreatePage';
+import LogoStyleEditPage from './routes/style/LogoStyleEditPage';
 
 class App extends Component {
   render() {
@@ -40,10 +44,14 @@ class App extends Component {
 
 export default (
   <Route path='/' component={App}>
-    <IndexRoute component={AllTodos} />
-    <Route path='/todo/edit/:id' component={EditTodo} />
+    <IndexRoute component={Home} />
+
     <Route path='/category' component={LogoCategoryListPage} />
-    <Route path='/category/add' component={LogoCategoryAddPage} />
+    <Route path='/category/create' component={LogoCategoryCreatePage} />
     <Route path='/category/edit/:id' component={LogoCategoryEditPage} />
+
+    <Route path='/style' component={LogoStyleListPage} />
+    <Route path='/style/create' component={LogoStyleCreatePage} />
+    <Route path='/style/edit/:id' component={LogoStyleEditPage} />
   </Route>
 );

@@ -11,27 +11,27 @@ import {
 } from '@sketchpixy/rubix';
 
 @withRouter
-class Category extends Component {
+class Style extends Component {
   edit = () => {
-    this.props.router.push(`/category/edit/${this.props.category._id}`);
+    this.props.router.push(`/style/edit/${this.props.style._id}`);
   }
   render() {
-    let {category} = this.props;
-    if (!category) return;
+    let {style} = this.props;
+    if (!style) return;
     return (
       <tr onClick={this.edit}>
-        <td>{category.name}</td>
-        <td>{category.code}</td>
-        <td>{category.keyword}</td>
-        <td>{category.active}</td>
+        <td>{style.name}</td>
+        <td>{style.code}</td>
+        <td>{style.keyword}</td>
+        <td>{style.active}</td>
       </tr>
     );
   }
 }
 
-class CategoryList extends Component {
+class StyleList extends Component {
   static propTypes = {
-    categories: React.PropTypes.array,
+    styles: React.PropTypes.array,
   };
   componentDidMount() {
     $(ReactDOM.findDOMNode(this.table)).dataTable({
@@ -42,8 +42,8 @@ class CategoryList extends Component {
     });
   }
   render() {
-    let {categories} = this.props;
-    if (categories.length === 0) return null;
+    let {styles} = this.props;
+    if (styles.length === 0) return null;
     return (
       <Grid>
         <Row>
@@ -58,8 +58,8 @@ class CategoryList extends Component {
             </thead>
             <tbody>
               {
-                categories.map(category => {
-                  return <Category category={category} key={category._id} />
+                styles.map(style => {
+                  return <Style style={style} key={style._id} />
                 })
               }
             </tbody>
@@ -70,5 +70,4 @@ class CategoryList extends Component {
   }
 }
 
-
-export default CategoryList;
+export default StyleList;

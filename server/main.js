@@ -3,8 +3,6 @@ import { ReactRouterSSR } from 'meteor/rubix:reactrouter:react-router-ssr';
 
 import './setup-plugins';
 
-import '../imports/api/todos.js';
-import '../imports/api/LogoCategories';
 import routes from '../imports/routes';
 
 Meteor.startup(() => {
@@ -12,6 +10,7 @@ Meteor.startup(() => {
   // Otherwise, it will break the hot-reload
   // DO NOT REMOVE THIS LINE. TO TEST run: "meteor --production" instead
   if (process.env.NODE_ENV === 'production') {
+    console.log('RUN production')
     ReactRouterSSR.LoadWebpackStats(WebpackStats);
 
     ReactRouterSSR.Run(routes, {
