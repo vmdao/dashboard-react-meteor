@@ -25,4 +25,5 @@ thereactivestack:blazetoreact
 webpack:react
 rubix:sass
 webpack:postcss
-nimble:restivus
+cfs:standard-packages
+cfs:filesystem

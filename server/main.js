@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 import { ReactRouterSSR } from 'meteor/rubix:reactrouter:react-router-ssr';
-
 import './setup-plugins';
 
 import routes from '../imports/routes';
@@ -17,7 +16,6 @@ Meteor.startup(() => {
       rootElement: 'app-container'
     });
   }
-
   WebApp.addHtmlAttributeHook(function () {
     return {
       "dir": "ltr",

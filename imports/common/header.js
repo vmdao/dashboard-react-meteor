@@ -22,7 +22,8 @@ import {
   Grid,
   Row,
   Radio,
-  Col } from '@sketchpixy/rubix';
+  Col
+} from '@sketchpixy/rubix';
 
 class Brand extends React.Component {
   render() {
@@ -30,7 +31,7 @@ class Brand extends React.Component {
       <Navbar.Header {...this.props}>
         <Navbar.Brand tabIndex='-1'>
           <a href='#'>
-            <img src='/imgs/common/logo.png' alt='rubix' width='111' height='28' />
+            <img src='/imgs/common/logo.png' alt='BrandCaff' width='111' height='28' />
           </a>
         </Navbar.Brand>
       </Navbar.Header>
@@ -65,7 +66,7 @@ export default class Header extends React.Component {
                   <SidebarBtn />
                 </Col>
                 <Col xs={6} sm={4}>
-                  <Brand />
+                  
                 </Col>
                 <Col xs={3} sm={8} collapseRight className='text-right'>
                   <HeaderNavigation />

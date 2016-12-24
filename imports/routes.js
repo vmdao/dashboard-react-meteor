@@ -21,6 +21,10 @@ import LogoStyleListPage from './routes/style/LogoStyleListPage';
 import LogoStyleCreatePage from './routes/style/LogoStyleCreatePage';
 import LogoStyleEditPage from './routes/style/LogoStyleEditPage';
 
+import LogoListPage from './routes/logo/LogoListPage';
+import LogoCreatePage from './routes/logo/LogoCreatePage';
+import LogoEditPage from './routes/logo/LogoEditPage';
+
 class App extends Component {
   render() {
     return (
@@ -53,5 +57,9 @@ export default (
     <Route path='/style' component={LogoStyleListPage} />
     <Route path='/style/create' component={LogoStyleCreatePage} />
     <Route path='/style/edit/:id' component={LogoStyleEditPage} />
+
+    <Route path='/logo' component={LogoListPage} />
+    <Route path='/logo/create' component={LogoCreatePage} />
+    <Route path='/logo/edit/:id' component={LogoEditPage} />
   </Route>
 );

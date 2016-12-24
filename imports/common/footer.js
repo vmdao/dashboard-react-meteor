@@ -13,7 +13,7 @@ export default class Footer extends React.Component {
 
   componentDidMount() {
     this.setState({
-      version: document.body.getAttribute('data-version')
+      version: '1.0'
     });
   }
 
@@ -24,7 +24,7 @@ export default class Footer extends React.Component {
         <Grid id='footer' className='text-center'>
           <Row>
             <Col xs={12}>
-              <div>© {year} SketchPixy Creative - v{this.state.version}</div>
+              <div>© {year} Uplevo - v{this.state.version}</div>
             </Col>
           </Row>
         </Grid>
