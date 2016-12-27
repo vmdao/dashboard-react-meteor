@@ -27,3 +27,13 @@ rubix:sass
 webpack:postcss
 cfs:standard-packages
 cfs:filesystem
+
+accounts-base
+accounts-password@1.2.12
+alanning:roles
+msavin:mongol
+okgrow:analytics
+mizzao:user-status
+
+bigdata:visit-tracker
+session

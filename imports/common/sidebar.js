@@ -54,6 +54,28 @@ class ApplicationSidebar extends React.Component {
                           <SidebarNavItem glyph='icon-outlined-todolist' name='Add New Logo' href='/logo/create' />
                         </SidebarNav>
                       </SidebarNavItem>
+                       <SidebarNavItem glyph='icon-outlined-todolist' name='Account'>
+                        <SidebarNav>
+                          <SidebarNavItem glyph='icon-outlined-todolist' name='All Account' href='/account' />
+                          <SidebarNavItem glyph='icon-outlined-todolist' name='Add New Account' href='/account/create' />
+                        </SidebarNav>
+                      </SidebarNavItem>
+                    </SidebarNav>
+                  </SidebarNavItem>
+                  <SidebarNavItem glyph='icon-feather-mail' name='Account'>
+                    <SidebarNav>
+                       <SidebarNavItem glyph='icon-outlined-todolist' name='Account'>
+                        <SidebarNav>
+                          <SidebarNavItem glyph='icon-outlined-todolist' name='All Account Online' href='/account/online' />
+                          <SidebarNavItem glyph='icon-outlined-todolist' name='All Account' href='/account' />
+                          <SidebarNavItem glyph='icon-outlined-todolist' name='Add New Account' href='/account/create' />
+                        </SidebarNav>
+                      </SidebarNavItem>
+                    </SidebarNav>
+                  </SidebarNavItem>
+                  <SidebarNavItem glyph='icon-feather-mail' name='Analytic'>
+                    <SidebarNav>
+                      <SidebarNavItem glyph='icon-outlined-todolist' name='Analytic seft' href='/analytic' />
                     </SidebarNav>
                   </SidebarNavItem>
                 </SidebarNav>

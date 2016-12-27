@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
-
+import { Accounts } from 'meteor/accounts-base'
 import {
   Row,
   Col,
@@ -14,29 +14,29 @@ import {
   ControlLabel,
 } from '@sketchpixy/rubix';
 
-class CategoryCreate extends Component {
+class AccountCreate extends Component {
   state = {
     errors: []
   };
   create = (e) => {
     e.preventDefault();
-    let formCode = ReactDOM.findDOMNode(this.formCode).value;
+    let formEmail = ReactDOM.findDOMNode(this.formEmail).value;
     let formActive = ReactDOM.findDOMNode(this.formActive).value;
-    let formKeyword = ReactDOM.findDOMNode(this.formKeyword).value;
-    let formName = ReactDOM.findDOMNode(this.formName).value;
-    Meteor.call('logoCategories.create', formCode, formActive, formName, formKeyword, (err, res) => {
-      if (err) {
-        this.setState({
+    let formUsername = ReactDOM.findDOMNode(this.formUsername).value;
+    let formFullname = ReactDOM.findDOMNode(this.formFullname).value;
+    let formPassword = ReactDOM.findDOMNode(this.formPassword).value;
+    console.log(Accounts)
+    Accounts.createUser({email: formEmail, fullname: formFullname, username: formUsername, password: formPassword, active: formActive}, (err) => {
+      if(err){
+         this.setState({
           errors: [].concat(err),
         });
         return;
+      } else {
+        alert('OK');
+        this.setState({ errors: [] });
       }
-      this.setState({ errors: [] });
-    }); 
-    analytics.track( 'Created a new category', {
-      title: 'Testing out analytics'
     });
-
   }
   render() {
     let errors = this.state.errors.length ?
@@ -53,12 +53,12 @@ class CategoryCreate extends Component {
         <Form horizontal onSubmit={this.create}>
           <FormGroup>
             <Col sm={10}>
-              <FormGroup controlId="formCode">
+              <FormGroup controlId="formEmail">
                 <Col componentClass={ControlLabel} sm={2}>
-                  Code
+                  Email
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="text" placeholder="0001" ref={(input) => this.formCode = input} />
+                  <FormControl type="email" placeholder="hey@brandcaff" ref={(input) => this.formEmail = input} />
                 </Col>
               </FormGroup>
               <FormGroup controlId="formControlsSelect">
@@ -78,15 +78,23 @@ class CategoryCreate extends Component {
                   Name
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="text" placeholder="Education" ref={(input) => this.formName = input} />
+                  <FormControl type="text" placeholder="Minh Dao Vu" ref={(input) => this.formFullname = input} />
                 </Col>
               </FormGroup>
-              <FormGroup controlId="formKeyword">
+              <FormGroup controlId="formUsername">
                 <Col componentClass={ControlLabel} sm={2}>
-                  Keyword
+                  Username
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="text" placeholder="Education, school, trainning" ref={(input) => this.formKeyword = input} />
+                  <FormControl type="text" placeholder="Education, school, trainning" ref={(input) => this.formUsername = input} />
+                </Col>
+              </FormGroup>
+               <FormGroup controlId="formPassword">
+                <Col componentClass={ControlLabel} sm={2}>
+                  Password
+                </Col>
+                <Col sm={10}>
+                  <FormControl type="password" placeholder="Education, school, trainning" ref={(input) => this.formPassword = input} />
                 </Col>
               </FormGroup>
               <FormGroup controlId="formSubmit">
@@ -104,4 +112,4 @@ class CategoryCreate extends Component {
   }
 }
 
-export default CategoryCreate;
+export default AccountCreate;

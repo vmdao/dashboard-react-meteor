@@ -9,13 +9,18 @@ Meteor.startup(() => {
   // Otherwise, it will break the hot-reload
   // DO NOT REMOVE THIS LINE. TO TEST run: "meteor --production" instead
   if (process.env.NODE_ENV === 'production') {
-    console.log('RUN production')
+    console.log('--------------------RUN PRODUCTION--------------------')
     ReactRouterSSR.LoadWebpackStats(WebpackStats);
 
     ReactRouterSSR.Run(routes, {
       rootElement: 'app-container'
     });
+  } else {
+    console.log('--------------------RUN DEVELOPMENT--------------------')
   }
+Meteor.publish("userStatus", function() {
+  return Meteor.users.find({ "status.online": true });
+});
   WebApp.addHtmlAttributeHook(function () {
     return {
       "dir": "ltr",

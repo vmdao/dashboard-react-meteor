@@ -14,7 +14,7 @@ import {
   ControlLabel,
 } from '@sketchpixy/rubix';
 
-class CategoryCreate extends Component {
+export default  class LogoTypeCreate extends Component {
   state = {
     errors: []
   };
@@ -24,7 +24,7 @@ class CategoryCreate extends Component {
     let formActive = ReactDOM.findDOMNode(this.formActive).value;
     let formKeyword = ReactDOM.findDOMNode(this.formKeyword).value;
     let formName = ReactDOM.findDOMNode(this.formName).value;
-    Meteor.call('logoCategories.create', formCode, formActive, formName, formKeyword, (err, res) => {
+    Meteor.call('logoTypes.create', formCode, formActive, formName, formKeyword, (err, res) => {
       if (err) {
         this.setState({
           errors: [].concat(err),
@@ -33,11 +33,8 @@ class CategoryCreate extends Component {
       }
       this.setState({ errors: [] });
     }); 
-    analytics.track( 'Created a new category', {
-      title: 'Testing out analytics'
-    });
-
   }
+
   render() {
     let errors = this.state.errors.length ?
       (
@@ -103,5 +100,3 @@ class CategoryCreate extends Component {
     );
   }
 }
-
-export default CategoryCreate;
