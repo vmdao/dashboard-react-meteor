@@ -13,15 +13,15 @@ import {
 } from '@sketchpixy/rubix';
 
 import { LogoTags } from '../../api/LogoTags';
-import LogoTagEdit from '../../components/backend/style/LogoTagEdit';
+import LogoTagEdit from '../../components/backend/logo-tag/LogoTagEdit';
 
 
 class LogoTagEditPage extends Component {
     static propTypes = {
-        tag: React.PropTypes.object,
+        data: React.PropTypes.object,
     };
     render() {
-        let data= this.props.tag;
+        let data= this.props.data;
         if (!data) return null;
         return (
             <PanelContainer>
@@ -31,7 +31,7 @@ class LogoTagEditPage extends Component {
                             <Row>
                                 <Col xs={12}>
                                     <h3>Edit Tag</h3>
-                                    <LogoTag tag={data} />
+                                    <LogoTagEdit data={data} />
                                 </Col>
                             </Row>
                         </Grid>
@@ -44,8 +44,8 @@ class LogoTagEditPage extends Component {
 
 export default createContainer(({ params }) => {
     let _id  = params.id;
-    Meteor.subscribe('logoStyles', _id);
+    Meteor.subscribe('logoTags', _id);
     return {
-        tag: LogoStyles.find({ _id }).fetch()[0],
+        data: LogoTags.find({ _id }).fetch()[0],
     };
 }, LogoTagEditPage);

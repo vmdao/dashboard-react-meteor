@@ -12,7 +12,7 @@ import {
 @withRouter
 class LogoType extends Component {
   edit = () => {
-    this.props.router.push(`/bankend/logo-type/edit/${this.props.data._id}`);
+    this.props.router.push(`/bankend/logo-types/edit/${this.props.data._id}`);
   }
   render() {
     let data = this.props.data;
@@ -30,7 +30,7 @@ class LogoType extends Component {
 
 export default class LogoTypeList extends Component {
   static propTypes = {
-    logoTypes: React.PropTypes.array,
+    data: React.PropTypes.array,
   };
   componentDidMount() {
     $(ReactDOM.findDOMNode(this.table)).dataTable({
@@ -41,8 +41,8 @@ export default class LogoTypeList extends Component {
     });
   }
   render() {
-    let datas = this.props.logoTypes || [];
-    if (datas.length === 0) return null;
+    let data = this.props.data || [];
+    if (data.length === 0) return null;
     return (
       <Grid>
         <Row>
@@ -57,8 +57,8 @@ export default class LogoTypeList extends Component {
             </thead>
             <tbody>
               {
-                datas.map(data => {
-                  return <LogoType data={data} key={data._id} />
+                data.map(item => {
+                  return <LogoType data={item} key={item._id} />
                 })
               }
             </tbody>

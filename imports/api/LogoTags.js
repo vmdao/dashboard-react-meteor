@@ -2,41 +2,41 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
-export const LogoStyles = new Mongo.Collection('logoStyles');
+export const LogoTags = new Mongo.Collection('logoTags');
 
 Meteor.methods({
-  'logoStyles.remove'(_id) {
-    LogoStyles.remove({ _id });
+  'logoTags.remove'(_id) {
+    return LogoTags.remove({ _id });
   },
-  'logoStyles.create'(code, active, name, keyword) {
+  'logoTags.create'(code, active, name, keyword) {
     check(active, String);
     check(code, String);
     check(name, String);
     check(keyword, String);
 
     if (code.length <= 0) {
-      throw new Meteor.Error(403, `'logoStyles' should not be empty!`);
+      throw new Meteor.Error(403, `'logoTags' should not be empty!`);
       return;
     }
 
-    LogoStyles.insert({ code, active, name, keyword });
+    return LogoTags.insert({ code, active, name, keyword });
   },
 
-  'logoStyles.update'(_id, active, name, keyword) {
+  'logoTags.update'(_id, active, name, keyword) {
     check(active, String);
     check(name, String);
     check(keyword, String);
-    LogoStyles.update({ _id }, { $set: { active, name, keyword } });
+   return LogoTags.update({ _id }, { $set: { active, name, keyword } });
   }
 });
 
 if (Meteor.isServer) {
   // This code only runs on the server
-  Meteor.publish('logoStyles', () => {
-    return LogoStyles.find();
+  Meteor.publish('logoTags', () => {
+    return LogoTags.find();
   });
 
-  Meteor.publish('logoStyle', (_id) => {
-    return LogoStyles.find({ _id });
+  Meteor.publish('logoTag', (_id) => {
+    return LogoTags.find({ _id });
   });
 }

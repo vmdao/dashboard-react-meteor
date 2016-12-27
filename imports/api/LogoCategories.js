@@ -6,7 +6,7 @@ export const LogoCategories = new Mongo.Collection('logoCategories');
 
 Meteor.methods({
   'logoCategories.remove'(_id) {
-    LogoCategories.remove({ _id });
+  return  LogoCategories.remove({ _id });
   },
   'logoCategories.create'(code, active, name, keyword) {
     check(active, String);
@@ -19,14 +19,14 @@ Meteor.methods({
       return;
     }
 
-    LogoCategories.insert({ code, active, name, keyword });
+    return LogoCategories.insert({ code, active, name, keyword });
   },
 
   'logoCategories.update'(_id, active, name, keyword) {
     check(active, String);
     check(name, String);
     check(keyword, String);
-    LogoCategories.update({ _id }, { $set: { active, name, keyword } });
+    return LogoCategories.update({ _id }, { $set: { active, name, keyword } });
   }
 });
 

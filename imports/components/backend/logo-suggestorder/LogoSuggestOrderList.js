@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { withRouter } from 'react-router';
-import { Meteor } from 'meteor/meteor';
 
 import {
   Row,
@@ -11,26 +10,29 @@ import {
 } from '@sketchpixy/rubix';
 
 @withRouter
-class LogoTag extends Component {
+class LogoSuggestOrder extends Component {
   edit = () => {
-    this.props.router.push(`/backend/logo-tags/edit/${this.props.data._id}`);
+    this.props.router.push(`/backend/logo-suggestorders/edit/${this.props.data._id}`);
   }
   render() {
     let {data} = this.props;
     if (!data) return;
+    let category = data.category || {};
+    let style = data.style || {};
+    let type = data.type || {};
     return (
       <tr onClick={this.edit}>
-        <td>{data.name}</td>
-        <td>{data.code}</td>
-        <td>{data.keyword}</td>
-        <td>{data.active}</td>
+        <td>{category.name}</td>
+        <td>{style.name}</td>
+        <td>{type.name}</td>
+        <td>{'Create logo has ' + category.name + ' category. Style is ' + style.name + ' And Type is ' + type.name}</td>
+        <td>{data.count}</td>
       </tr>
     );
   }
 }
 
-
-export default class LogoTagList extends Component {
+export default class LogoSuggestOrderList extends Component {
   static propTypes = {
     data: React.PropTypes.array,
   };
@@ -43,7 +45,7 @@ export default class LogoTagList extends Component {
     });
   }
   render() {
-    let {data} = this.props;
+    let data = this.props.data || [];
     if (data.length === 0) return null;
     return (
       <Grid>
@@ -51,16 +53,17 @@ export default class LogoTagList extends Component {
           <Table ref={(c) => this.table = c} className='display' cellSpacing='0' width='100%'>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Code</th>
-                <th>Keyword</th>
-                <th>Active</th>
+                <th>Category</th>
+                <th>Style</th>
+                <th>Type</th>
+                <th>Desciption</th>
+                <th>Maked</th>
               </tr>
             </thead>
             <tbody>
               {
                 data.map(item => {
-                  return <LogoTag data={item} key={item._id} />
+                  return <LogoSuggestOrder data={item} key={item._id} />
                 })
               }
             </tbody>
@@ -70,3 +73,4 @@ export default class LogoTagList extends Component {
     );
   }
 }
+

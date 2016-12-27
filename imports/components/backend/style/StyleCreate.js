@@ -31,9 +31,18 @@ class StyleCreate extends Component {
         });
         return;
       }
-      this.setState({ errors: [] });
+      Meteor.call('logoSuggestOrders.createStyle', {style: res}, (err, res)=>{
+         if (err) {
+            this.setState({
+              errors: [].concat(err),
+            });
+            return;
+          }
+          alert('OK');
+          this.setState({ errors: [] });
+      })
     });
-
+   
   }
   render() {
     let errors = this.state.errors.length ?

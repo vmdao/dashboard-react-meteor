@@ -6,7 +6,7 @@ export const Logos = new Mongo.Collection('logos');
 
 Meteor.methods({
   'logos.remove'(_id) {
-    Logos.remove({ _id });
+  return  Logos.remove({ _id });
   },
   'logos.create'(code, active, name, keyword) {
     check(active, String);
@@ -19,14 +19,14 @@ Meteor.methods({
       return;
     }
 
-    Logos.insert({ code, active, name, keyword });
+   return Logos.insert({ code, active, name, keyword });
   },
 
   'logos.update'(_id, active, name, keyword) {
     check(active, String);
     check(name, String);
     check(keyword, String);
-    Logos.update({ _id }, { $set: { active, name, keyword } });
+   return  Logos.update({ _id }, { $set: { active, name, keyword } });
   }
 });
 

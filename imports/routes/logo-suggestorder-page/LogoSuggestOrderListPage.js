@@ -12,11 +12,10 @@ import {
   PanelContainer,
 } from '@sketchpixy/rubix';
 
-import { LogoTags } from '../../api/LogoTags';
-import LogoTagList from '../../components/backend/logo-tag/LogoTagList';
-
-
-class LogoTagListPage extends Component {
+import { LogoSuggestOrders } from '../../api/LogoSuggestOrders';
+import LogoSuggestOrderList from '../../components/backend/logo-suggestorder/LogoSuggestOrderList';
+ 
+class LogoSuggestOrderListPage extends Component {
   static propTypes = {
     data: React.PropTypes.array.isRequired,
   };
@@ -30,8 +29,8 @@ class LogoTagListPage extends Component {
             <Grid>
               <Row>
                 <Col xs={12}>
-                  <h3>Tags List</h3>
-                  <LogoTagList data={data} />
+                  <h3>Logo Suggest Order List</h3>
+                  <LogoSuggestOrderList data={data} />
                 </Col>
               </Row>
             </Grid>
@@ -43,8 +42,8 @@ class LogoTagListPage extends Component {
 }
 
 export default createContainer(() => {
-  Meteor.subscribe('logoTags');
+  Meteor.subscribe('logoSuggestOrders');
   return {
-    data: LogoTags.find({}).fetch() || [],
+    data: LogoSuggestOrders.find({}).fetch() || [],
   };
-}, LogoTagListPage);
+}, LogoSuggestOrderListPage);

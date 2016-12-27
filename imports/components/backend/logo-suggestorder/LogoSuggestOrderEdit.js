@@ -14,19 +14,20 @@ import {
   ControlLabel,
 } from '@sketchpixy/rubix';
 
-export default class LogoTagEdit extends Component {
+export default class LogoTypeEdit extends Component {
   state = {
     errors: []
   };
-
   update = (e) => {
     e.preventDefault();
-    let formCode = ReactDOM.findDOMNode(this.formCode).value;
     let formActive = ReactDOM.findDOMNode(this.formActive).value;
-    let formKeyword = ReactDOM.findDOMNode(this.formKeyword).value;
-    let formName = ReactDOM.findDOMNode(this.formName).value;
+    let formPrority = ReactDOM.findDOMNode(this.formPrority).value;
+    const data={
+      active : formActive,
+      prority : formPrority
+    }
     let { _id } = this.props.category;
-    Meteor.call('logoTags.update', _id, formActive, formName, formKeyword, (err, res) => {
+    Meteor.call('logoSuggestOrders.update', _id, data, (err, res) => {
       if (err) {
         this.setState({
           errors: [].concat(err),
@@ -37,7 +38,6 @@ export default class LogoTagEdit extends Component {
     });
 
   }
-
   render() {
     let errors = this.state.errors.length ?
       (
@@ -57,10 +57,10 @@ export default class LogoTagEdit extends Component {
             <Col sm={10}>
               <FormGroup controlId="formCode">
                 <Col componentClass={ControlLabel} sm={2}>
-                  Code
+                  Prority
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="text" placeholder="0001" defaultValue={data.code} ref={(input) => this.formCode = input} />
+                  <FormControl type="text" placeholder="0001" defaultValue={data.prority} ref={(input) => this.formPrority = input} />
                 </Col>
               </FormGroup>
               <FormGroup controlId="formControlsSelect" >
@@ -72,23 +72,6 @@ export default class LogoTagEdit extends Component {
                     <option value="1">On</option>
                     <option value="0">Off</option>
                   </FormControl>
-                </Col>
-              </FormGroup>
-
-              <FormGroup controlId="formName">
-                <Col componentClass={ControlLabel} sm={2}>
-                  Name
-                </Col>
-                <Col sm={10}>
-                  <FormControl type="text" placeholder="Education" defaultValue={data.name} ref={(input) => this.formName = input} />
-                </Col>
-              </FormGroup>
-              <FormGroup controlId="formKeyword">
-                <Col componentClass={ControlLabel} sm={2}>
-                  Keyword
-                </Col>
-                <Col sm={10}>
-                  <FormControl type="text" placeholder="Education, school, trainning" defaultValue={data.keyword} ref={(input) => this.formKeyword = input} />
                 </Col>
               </FormGroup>
               <FormGroup controlId="formSubmit">
@@ -105,3 +88,4 @@ export default class LogoTagEdit extends Component {
     );
   }
 }
+

@@ -6,7 +6,7 @@ export const LogoStyles = new Mongo.Collection('logoStyles');
 
 Meteor.methods({
   'logoStyles.remove'(_id) {
-    LogoStyles.remove({ _id });
+   return LogoStyles.remove({ _id });
   },
   'logoStyles.create'(code, active, name, keyword) {
     check(active, String);
@@ -19,14 +19,14 @@ Meteor.methods({
       return;
     }
 
-    LogoStyles.insert({ code, active, name, keyword });
+   return LogoStyles.insert({ code, active, name, keyword });
   },
 
   'logoStyles.update'(_id, active, name, keyword) {
     check(active, String);
     check(name, String);
     check(keyword, String);
-    LogoStyles.update({ _id }, { $set: { active, name, keyword } });
+    return LogoStyles.update({ _id }, { $set: { active, name, keyword } });
   }
 });
 

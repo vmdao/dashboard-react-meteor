@@ -7,21 +7,15 @@ import {
     Col,
     Grid,
     Panel,
-    Alert,
     PanelBody,
     PanelContainer,
 } from '@sketchpixy/rubix';
 
-import { LogoTypes } from '../../api/LogoTypes';
-import LogoTypeEdit from '../../components/backend/logo-type/LogoTypeEdit';
+import LogoSuggestOrderCreate from '../../components/backend/logo-suggestorder/LogoSuggestOrderCreate';
 
-class LogoTypeEditPage extends Component {
-    static propTypes = {
-        data: React.PropTypes.object,
-    };
+export default class LogoSuggestOrderCreatePage extends Component {
+
     render() {
-        let data = this.props.data;
-        if (!data) return null;
         return (
             <PanelContainer>
                 <Panel>
@@ -29,8 +23,8 @@ class LogoTypeEditPage extends Component {
                         <Grid>
                             <Row>
                                 <Col xs={12}>
-                                    <h3>Edit Type</h3>
-                                    <LogoTypeEdit data={data} />
+                                    <h3>Add New Logo Suggest </h3>
+                                    <LogoSuggestOrderCreate />
                                 </Col>
                             </Row>
                         </Grid>
@@ -40,11 +34,3 @@ class LogoTypeEditPage extends Component {
         );
     }
 }
-
-export default createContainer(({ params }) => {
-    let _id  = params.id;
-    Meteor.subscribe('logoTypes', _id);
-    return {
-        data: LogoTypes.find({ _id }).fetch()[0],
-    };
-}, LogoTypeEditPage);

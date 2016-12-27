@@ -43,9 +43,10 @@ class AnalyticListPage extends Component {
 
 export default createContainer(() => {
   const analytics = VisitTracker.visits.find().fetch() || [];
-  console.log(123, VisitTracker.visits.find().fetch())
+
   console.log(456, analytics)
   return {
     analytics: analytics,
   };
 }, AnalyticListPage);
+console.log(123, VisitTracker.visits.find().fetch())

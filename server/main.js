@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { ReactRouterSSR } from 'meteor/rubix:reactrouter:react-router-ssr';
 import './setup-plugins';
-
+import {LogoCategories} from '../imports/api/LogoCategories';
 import routes from '../imports/routes';
 
 Meteor.startup(() => {
@@ -18,9 +18,10 @@ Meteor.startup(() => {
   } else {
     console.log('--------------------RUN DEVELOPMENT--------------------')
   }
-Meteor.publish("userStatus", function() {
-  return Meteor.users.find({ "status.online": true });
-});
+  Meteor.publish("userStatus", function() {
+    return Meteor.users.find({ "status.online": true });
+  });
+
   WebApp.addHtmlAttributeHook(function () {
     return {
       "dir": "ltr",

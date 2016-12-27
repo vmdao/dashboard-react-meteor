@@ -14,7 +14,7 @@ import {
   ControlLabel,
 } from '@sketchpixy/rubix';
 
-export default  class LogoTypeCreate extends Component {
+export default class LogoTypeCreate extends Component {
   state = {
     errors: []
   };
@@ -31,7 +31,16 @@ export default  class LogoTypeCreate extends Component {
         });
         return;
       }
-      this.setState({ errors: [] });
+       Meteor.call('logoSuggestOrders.createType', {type: res}, (err, res)=>{
+         if (err) {
+            this.setState({
+              errors: [].concat(err),
+            });
+            return;
+          }
+          alert('OK');
+          this.setState({ errors: [] });
+      })
     }); 
   }
 

@@ -4,7 +4,7 @@
   "main": "server/main.js",
   "browser": "client/main.js",
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor run --settings setting.json"
   },
   "dependencies": {
     "@sketchpixy/rubix": "^2.0.0",

@@ -21,13 +21,23 @@ import LogoStyleListPage from './routes/style/LogoStyleListPage';
 import LogoStyleCreatePage from './routes/style/LogoStyleCreatePage';
 import LogoStyleEditPage from './routes/style/LogoStyleEditPage';
 
-import LogoTagListPage from './routes/logo-tag/LogoTagListPage';
-import LogoTagCreatePage from './routes/logo-tag/LogoTagCreatePage';
-import LogoTagEditPage from './routes/logo-tag/LogoTagEditPage';
+import LogoTagListPage from './routes/logo-tag-page/LogoTagListPage';
+import LogoTagCreatePage from './routes/logo-tag-page/LogoTagCreatePage';
+import LogoTagEditPage from './routes/logo-tag-page/LogoTagEditPage';
+
+import LogoTypeListPage from './routes/logo-type-page/LogoTypeListPage';
+import LogoTypeCreatePage from './routes/logo-type-page/LogoTypeCreatePage';
+import LogoTypeEditPage from './routes/logo-type-page/LogoTypeEditPage';
+
+import LogoSuggestOrderListPage from './routes/logo-suggestorder-page/LogoSuggestOrderListPage';
+import LogoSuggestOrderCreatePage from './routes/logo-suggestorder-page/LogoSuggestOrderCreatePage';
+import LogoSuggestOrderEditPage from './routes/logo-suggestorder-page/LogoSuggestOrderEditPage';
 
 import LogoListPage from './routes/logo/LogoListPage';
 import LogoCreatePage from './routes/logo/LogoCreatePage';
 import LogoEditPage from './routes/logo/LogoEditPage';
+
+
 
 import AccountListPage from './routes/account/AccountListPage';
 import AccountCreatePage from './routes/account/AccountCreatePage';
@@ -73,6 +83,14 @@ export default (
       <Route path='/backend/logo-tags' component={LogoTagListPage} />
       <Route path='/backend/logo-tags/create' component={LogoTagCreatePage} />
       <Route path='/backend/logo-tags/edit/:id' component={LogoTagEditPage} />
+
+      <Route path='/backend/logo-types' component={LogoTypeListPage} />
+      <Route path='/backend/logo-types/create' component={LogoTypeCreatePage} />
+      <Route path='/backend/logo-types/edit/:id' component={LogoTypeEditPage} />
+
+      <Route path='/backend/logo-suggestorders' component={LogoSuggestOrderListPage} />
+      <Route path='/backend/logo-suggestorders/create' component={LogoSuggestOrderCreatePage} />
+      <Route path='/backend/logo-suggestorders/edit/:id' component={LogoSuggestOrderEditPage} />
 
       <Route path='/logo' component={LogoListPage} />
       <Route path='/logo/create' component={LogoCreatePage} />
