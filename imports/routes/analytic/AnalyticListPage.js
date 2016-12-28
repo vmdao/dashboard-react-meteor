@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
-
+import { Tracker } from 'meteor/tracker';
+import { compose } from 'react-komposer';
 import {
   Row,
   Col,
@@ -17,11 +18,11 @@ import AnalyticList from '../../components/backend/analytic/AnalyticList';
 
 class AnalyticListPage extends Component {
   static propTypes = {
-    analytics: React.PropTypes.array.isRequired,
+    data: React.PropTypes.array.isRequired,
   };
 
   render() {
-    let {analytics} = this.props;
+    let {data} = this.props;
     return (
       <PanelContainer>
         <Panel>
@@ -30,7 +31,7 @@ class AnalyticListPage extends Component {
               <Row>
                 <Col xs={12}>
                   <h3>Analytics List:</h3>
-                  <AnalyticList analytics={analytics} />
+                  <AnalyticList data={data} />
                 </Col>
               </Row>
             </Grid>
@@ -41,12 +42,22 @@ class AnalyticListPage extends Component {
   }
 }
 
-export default createContainer(() => {
-  const analytics = VisitTracker.visits.find().fetch() || [];
+// export default createContainer(() => {
+//   Meteor.subscribe('analytics');
+//   const analytics = Analytics.find().fetch() || [];
+//   console.log(456, analytics)
+//   return {
+//     analytics: analytics,
+//   };
+// }, AnalyticListPage);
+function composer(props, onData) {
+  console.log(321, VisitTracker.visits.find().fetch());
+  Tracker.autorun(() => {
+    onData(null, {
+      data: VisitTracker.visits.find().fetch(),
+    });
+  })
 
-  console.log(456, analytics)
-  return {
-    analytics: analytics,
-  };
-}, AnalyticListPage);
-console.log(123, VisitTracker.visits.find().fetch())
+}
+
+export default compose(composer)(AnalyticListPage);

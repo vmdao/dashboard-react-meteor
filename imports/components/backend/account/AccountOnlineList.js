@@ -41,12 +41,12 @@ export default class AccountList extends Component {
     accounts: React.PropTypes.array,
   };
   componentDidMount() {
-    $(ReactDOM.findDOMNode(this.table)).dataTable({
-      responsive: true,
-      columnDefs: [
-        {  className: 'dt-body-right' }
-      ]
-    });
+    // $(ReactDOM.findDOMNode(this.table)).dataTable({
+    //   responsive: true,
+    //   columnDefs: [
+    //     {  className: 'dt-body-right' }
+    //   ]
+    // });
   }
   render() {
     let {accounts} = this.props;

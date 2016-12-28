@@ -12,17 +12,17 @@ import {
   PanelContainer,
 } from '@sketchpixy/rubix';
 
-import { LogoCategories } from '../../api/LogoCategories';
-import CategoryList from '../../components/backend/category/CategoryList';
+import { LogoStyles } from '../../api/LogoStyles';
+import LogoStyleList from '../../components/backend/logo-style/LogoStyleList';
 
 
-class LogoCategoryListPage extends Component {
+class LogoStyleListPage extends Component {
   static propTypes = {
-    categories: React.PropTypes.array.isRequired,
+    styles: React.PropTypes.array.isRequired,
   };
 
   render() {
-    let {categories} = this.props;
+    let {styles} = this.props;
     return (
       <PanelContainer>
         <Panel>
@@ -30,8 +30,8 @@ class LogoCategoryListPage extends Component {
             <Grid>
               <Row>
                 <Col xs={12}>
-                  <h3>Categories List:</h3>
-                  <CategoryList categories={categories} />
+                  <h3>Styles List</h3>
+                  <LogoStyleList styles={styles} />
                 </Col>
               </Row>
             </Grid>
@@ -43,9 +43,9 @@ class LogoCategoryListPage extends Component {
 }
 
 export default createContainer(() => {
-  Meteor.subscribe('logoCategories');
-  const categories = LogoCategories.find({}).fetch() || [];
+  Meteor.subscribe('logoStyles');
+  const styles = LogoStyles.find({}).fetch() || [];
   return {
-    categories: categories,
+    styles: styles,
   };
-}, LogoCategoryListPage);
+}, LogoStyleListPage);

@@ -16,11 +16,11 @@ class Analytic extends Component {
     this.props.router.push(`/analytic/${this.props.analytic._id}`);
   }
   render() {
-    let {analytic} = this.props;
-    if (!analytic) return;
+    let {data} = this.props;
+    if (!data) return;
     return (
       <tr onClick={this.edit}>
-        <td>{analytic.referer}</td>
+        <td>{data.referer}</td>
       </tr>
     );
   }
@@ -28,7 +28,7 @@ class Analytic extends Component {
 
 export default class AnalyticList extends Component {
   static propTypes = {
-    analytics: React.PropTypes.array,
+    data: React.PropTypes.array,
   };
   componentDidMount() {
     $(ReactDOM.findDOMNode(this.table)).dataTable({
@@ -39,8 +39,9 @@ export default class AnalyticList extends Component {
     });
   }
   render() {
-    let {analytics} = this.props;
-    if (analytics.length === 0) return null;
+    console.log(12, this.props)
+    let {data} = this.props;
+    if (data.length === 0) return null;
     return (
       <Grid>
         <Row>
@@ -55,8 +56,8 @@ export default class AnalyticList extends Component {
             </thead>
             <tbody>
               {
-                analytics.map(analytic => {
-                  return <Analytic analytic={analytic} key={analytic._id} />
+                data.map(item => {
+                  return <Analytic data={item} key={item._id} />
                 })
               }
             </tbody>

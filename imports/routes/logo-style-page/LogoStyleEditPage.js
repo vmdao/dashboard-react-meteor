@@ -12,17 +12,17 @@ import {
     PanelContainer,
 } from '@sketchpixy/rubix';
 
-import { LogoCategories } from '../../api/LogoCategories';
-import CategoryEdit from '../../components/backend/category/CategoryEdit';
+import { LogoStyles } from '../../api/LogoStyles';
+import LogoStyleEdit from '../../components/backend/logo-style/LogoStyleEdit';
 
 
-class LogoCategoryEditPage extends Component {
+class LogoStyleEditPage extends Component {
     static propTypes = {
-        category: React.PropTypes.object,
+        style: React.PropTypes.object,
     };
     render() {
-        let { category } = this.props;
-        if (!category) return null;
+        let { style } = this.props;
+        if (!style) return null;
         return (
             <PanelContainer>
                 <Panel>
@@ -30,8 +30,8 @@ class LogoCategoryEditPage extends Component {
                         <Grid>
                             <Row>
                                 <Col xs={12}>
-                                    <h3>Edit Category:</h3>
-                                    <CategoryEdit category={category} />
+                                    <h3>Edit Style</h3>
+                                    <LogoStyleEdit style={style} />
                                 </Col>
                             </Row>
                         </Grid>
@@ -45,8 +45,8 @@ class LogoCategoryEditPage extends Component {
 export default createContainer(({ params }) => {
     let { id } = params;
     let _id = id;
-    Meteor.subscribe('logoCategories', _id);
+    Meteor.subscribe('logoStyles', _id);
     return {
-        category: LogoCategories.find({ _id }).fetch()[0],
+        style: LogoStyles.find({ _id }).fetch()[0],
     };
-}, LogoCategoryEditPage);
+}, LogoStyleEditPage);

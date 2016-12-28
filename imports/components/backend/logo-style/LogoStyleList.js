@@ -11,9 +11,9 @@ import {
 } from '@sketchpixy/rubix';
 
 @withRouter
-class Style extends Component {
+class LogoStyle extends Component {
   edit = () => {
-    this.props.router.push(`/style/edit/${this.props.style._id}`);
+    this.props.router.push(`/backend/logo-styles/edit/${this.props.style._id}`);
   }
   render() {
     let {style} = this.props;
@@ -29,17 +29,17 @@ class Style extends Component {
   }
 }
 
-class StyleList extends Component {
+export default  class LogoStyleList extends Component {
   static propTypes = {
     styles: React.PropTypes.array,
   };
   componentDidMount() {
-    $(ReactDOM.findDOMNode(this.table)).dataTable({
-      responsive: true,
-      columnDefs: [
-        { targets: [-1, -3], className: 'dt-body-right' }
-      ]
-    });
+    // $(ReactDOM.findDOMNode(this.table)).dataTable({
+    //   responsive: true,
+    //   columnDefs: [
+    //     { targets: [-1, -3], className: 'dt-body-right' }
+    //   ]
+    // });
   }
   render() {
     let {styles} = this.props;
@@ -59,7 +59,7 @@ class StyleList extends Component {
             <tbody>
               {
                 styles.map(style => {
-                  return <Style style={style} key={style._id} />
+                  return <LogoStyle style={style} key={style._id} />
                 })
               }
             </tbody>
@@ -70,4 +70,3 @@ class StyleList extends Component {
   }
 }
 
-export default StyleList;

@@ -11,9 +11,9 @@ import {
     PanelContainer,
 } from '@sketchpixy/rubix';
 
-import CategoryCreate from '../../components/backend/category/CategoryCreate';
+import LogoCategoryCreate from '../../components/backend/logo-category/LogoCategoryCreate';
 
-class LogoCategoryCreatePage extends Component {
+export default  class LogoCategoryCreatePage extends Component {
     render() {
         return (
             <PanelContainer>
@@ -23,7 +23,7 @@ class LogoCategoryCreatePage extends Component {
                             <Row>
                                 <Col xs={12}>
                                     <h3>Add New Category</h3>
-                                    <CategoryCreate />
+                                    <LogoCategoryCreate />
                                 </Col>
                             </Row>
                         </Grid>
@@ -34,4 +34,3 @@ class LogoCategoryCreatePage extends Component {
     }
 }
 
-export default LogoCategoryCreatePage;

@@ -11,9 +11,9 @@ import {
 } from '@sketchpixy/rubix';
 
 @withRouter
-class Category extends Component {
+class  LogoCategory extends Component {
   edit = () => {
-    this.props.router.push(`/category/edit/${this.props.category._id}`);
+    this.props.router.push(`/backend/logo-categories/edit/${this.props.category._id}`);
   }
   render() {
     let {category} = this.props;
@@ -29,17 +29,17 @@ class Category extends Component {
   }
 }
 
-class CategoryList extends Component {
+export default class CategoryList extends Component {
   static propTypes = {
     categories: React.PropTypes.array,
   };
   componentDidMount() {
-    $(ReactDOM.findDOMNode(this.table)).dataTable({
-      responsive: true,
-      columnDefs: [
-        { targets: [-1, -3], className: 'dt-body-right' }
-      ]
-    });
+    // $(ReactDOM.findDOMNode(this.table)).dataTable({
+    //   responsive: true,
+    //   columnDefs: [
+    //     { targets: [-1, -3], className: 'dt-body-right' }
+    //   ]
+    // });
   }
   render() {
     let {categories} = this.props;
@@ -59,7 +59,7 @@ class CategoryList extends Component {
             <tbody>
               {
                 categories.map(category => {
-                  return <Category category={category} key={category._id} />
+                  return <LogoCategory category={category} key={category._id} />
                 })
               }
             </tbody>
@@ -70,5 +70,3 @@ class CategoryList extends Component {
   }
 }
 
-
-export default CategoryList;

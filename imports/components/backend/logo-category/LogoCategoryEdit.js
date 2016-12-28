@@ -14,38 +14,25 @@ import {
   ControlLabel,
 } from '@sketchpixy/rubix';
 
-class CategoryCreate extends Component {
+export default  class LogoCategoryEdit extends Component {
   state = {
     errors: []
   };
-  create = (e) => {
+  update = (e) => {
     e.preventDefault();
     let formCode = ReactDOM.findDOMNode(this.formCode).value;
     let formActive = ReactDOM.findDOMNode(this.formActive).value;
     let formKeyword = ReactDOM.findDOMNode(this.formKeyword).value;
     let formName = ReactDOM.findDOMNode(this.formName).value;
-    Meteor.call('logoCategories.create', formCode, formActive, formName, formKeyword, (err, res) => {
+    let { _id } = this.props.category;
+    Meteor.call('logoCategories.update', _id, formActive, formName, formKeyword, (err, res) => {
       if (err) {
         this.setState({
           errors: [].concat(err),
         });
         return;
       }
-    
-      Meteor.call('logoSuggestOrders.createCategory', {category: res}, (err, res)=>{
-         if (err) {
-            this.setState({
-              errors: [].concat(err),
-            });
-            return;
-          }
-          alert('OK');
-          this.setState({ errors: [] });
-      })
-     
-    }); 
-    analytics.track( 'Created a new category', {
-      title: 'Testing out analytics'
+      this.setState({ errors: [] });
     });
 
   }
@@ -58,10 +45,12 @@ class CategoryCreate extends Component {
           })}
         </Alert>
       ) : null;
+    let {category} = this.props;
+    if (!category) return;
     return (
       <div>
         {errors}
-        <Form horizontal onSubmit={this.create}>
+        <Form horizontal onSubmit={this.update}>
           <FormGroup>
             <Col sm={10}>
               <FormGroup controlId="formCode">
@@ -69,15 +58,15 @@ class CategoryCreate extends Component {
                   Code
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="text" placeholder="0001" ref={(input) => this.formCode = input} />
+                  <FormControl type="text" placeholder="0001" defaultValue={category.code} ref={(input) => this.formCode = input} />
                 </Col>
               </FormGroup>
-              <FormGroup controlId="formControlsSelect">
+              <FormGroup controlId="formControlsSelect" >
                 <Col componentClass={ControlLabel} sm={2}>
                   Active
                 </Col>
                 <Col sm={10}>
-                  <FormControl componentClass="select" placeholder="select" ref={(input) => this.formActive = input} >
+                  <FormControl componentClass="select" placeholder="select" defaultValue={category.active} ref={(input) => this.formActive = input} >
                     <option value="1">On</option>
                     <option value="0">Off</option>
                   </FormControl>
@@ -89,7 +78,7 @@ class CategoryCreate extends Component {
                   Name
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="text" placeholder="Education" ref={(input) => this.formName = input} />
+                  <FormControl type="text" placeholder="Education" defaultValue={category.name} ref={(input) => this.formName = input} />
                 </Col>
               </FormGroup>
               <FormGroup controlId="formKeyword">
@@ -97,13 +86,13 @@ class CategoryCreate extends Component {
                   Keyword
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="text" placeholder="Education, school, trainning" ref={(input) => this.formKeyword = input} />
+                  <FormControl type="text" placeholder="Education, school, trainning" defaultValue={category.keyword} ref={(input) => this.formKeyword = input} />
                 </Col>
               </FormGroup>
               <FormGroup controlId="formSubmit">
                 <Col smOffset={2} sm={10}>
                   <Button type="submit">
-                    Create
+                    Update
 		              </Button>
                 </Col>
               </FormGroup>
@@ -115,4 +104,3 @@ class CategoryCreate extends Component {
   }
 }
 
-export default CategoryCreate;

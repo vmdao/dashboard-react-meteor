@@ -11,9 +11,9 @@ import {
     PanelContainer,
 } from '@sketchpixy/rubix';
 
-import StyleCreate from '../../components/backend/style/StyleCreate';
+import LogoStyleCreate from '../../components/backend/logo-style/LogoStyleCreate';
 
-class LogoStyleCreatePage extends Component {
+export default  class LogoStyleCreatePage extends Component {
 
     render() {
         return (
@@ -24,7 +24,7 @@ class LogoStyleCreatePage extends Component {
                             <Row>
                                 <Col xs={12}>
                                     <h3>Add New Style</h3>
-                                    <StyleCreate />
+                                    <LogoStyleCreate />
                                 </Col>
                             </Row>
                         </Grid>
@@ -34,5 +34,3 @@ class LogoStyleCreatePage extends Component {
         );
     }
 }
-
-export default LogoStyleCreatePage;

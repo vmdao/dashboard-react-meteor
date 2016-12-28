@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import LoginForm from '../../components/backend/auth/LoginForm';
-export default class AuthenticationPage extends Component {
+import React, { Component } from 'react';
+import LoginForm from '../../components/backend/auth/LoginForm'
+export default class AuthenticationBackendPage extends Component {
 
   render() {
     const style = {
@@ -12,12 +12,12 @@ export default class AuthenticationPage extends Component {
       overflow: 'auto',
       position: 'fixed',
       background: '#43525A',
-    } 
+    }
     return (
       <div id='auth-container' style={style} className='login'>
-        <div id='auth-row' style={{margin: 'auto', display: 'block', marginTop: 50}}>
+        <div id='auth-row' style={{ margin: 'auto', display: 'block', marginTop: 50 }}>
           <div id='auth-cell'>
-          <LoginForm />
+            <LoginForm />
           </div>
         </div>
       </div>

@@ -31,22 +31,23 @@ class ApplicationSidebar extends React.Component {
 
                   { /** Pages Section */}
                   <div className='sidebar-header'>PAGES</div>
-                  <SidebarNavItem glyph='icon-fontello-gauge' name='Dashboard' href='/' />
+                  <SidebarNavItem glyph='icon-fontello-gauge' name='Go Site' href='/' />
+                  <SidebarNavItem glyph='icon-fontello-gauge' name='Dashboard' href='/backend' />
                   <SidebarNavItem glyph='icon-feather-mail' name='App'>
                     <SidebarNav>
                       <SidebarNavItem glyph='icon-outlined-todolist' name='Category'>
                         <SidebarNav>
-                          <SidebarNavItem glyph='icon-outlined-todolist' name='All Categories' href='/category' />
-                          <SidebarNavItem glyph='icon-outlined-todolist' name='Add New Category' href='/category/create' />
+                          <SidebarNavItem glyph='icon-outlined-todolist' name='All Categories' href='/backend/logo-categories' />
+                          <SidebarNavItem glyph='icon-outlined-todolist' name='Add New Category' href='/backend/logo-categories/create' />
                         </SidebarNav>
                       </SidebarNavItem>
-                       <SidebarNavItem glyph='icon-outlined-todolist' name='Type'>
+                      <SidebarNavItem glyph='icon-outlined-todolist' name='Type'>
                         <SidebarNav>
                           <SidebarNavItem glyph='icon-outlined-todolist' name='All Types' href='/backend/logo-types' />
                           <SidebarNavItem glyph='icon-outlined-todolist' name='Add New Type' href='/backend/logo-types/create' />
                         </SidebarNav>
                       </SidebarNavItem>
-                       <SidebarNavItem glyph='icon-outlined-todolist' name='Tag'>
+                      <SidebarNavItem glyph='icon-outlined-todolist' name='Tag'>
                         <SidebarNav>
                           <SidebarNavItem glyph='icon-outlined-todolist' name='All Tags' href='/backend/logo-tags' />
                           <SidebarNavItem glyph='icon-outlined-todolist' name='Add New Tag' href='/backend/logo-tags/create' />
@@ -54,9 +55,9 @@ class ApplicationSidebar extends React.Component {
                       </SidebarNavItem>
                       <SidebarNavItem glyph='icon-outlined-todolist' name='Style'>
                         <SidebarNav>
-                          <SidebarNavItem glyph='icon-outlined-todolist' name='All Style' href='/style' />
-                          <SidebarNavItem glyph='icon-outlined-todolist' name='Add New Style' href='/style/create' />
-              
+                          <SidebarNavItem glyph='icon-outlined-todolist' name='All Style' href='/backend/logo-styles' />
+                          <SidebarNavItem glyph='icon-outlined-todolist' name='Add New Style' href='/backend/logo-styles/create' />
+
                         </SidebarNav>
                       </SidebarNavItem>
                       <SidebarNavItem glyph='icon-outlined-todolist' name='Suggest Logo'>
@@ -67,8 +68,8 @@ class ApplicationSidebar extends React.Component {
                       </SidebarNavItem>
                       <SidebarNavItem glyph='icon-outlined-todolist' name='Logo'>
                         <SidebarNav>
-                          <SidebarNavItem glyph='icon-outlined-todolist' name='All Logo' href='/logo' />
-                          <SidebarNavItem glyph='icon-outlined-todolist' name='Add New Logo' href='/logo/create' />
+                          <SidebarNavItem glyph='icon-outlined-todolist' name='All Logo' href='/backend/logos' />
+                          <SidebarNavItem glyph='icon-outlined-todolist' name='Add New Logo' href='/backend/logos/create' />
                         </SidebarNav>
                       </SidebarNavItem>
 
@@ -76,18 +77,18 @@ class ApplicationSidebar extends React.Component {
                   </SidebarNavItem>
                   <SidebarNavItem glyph='icon-feather-mail' name='Account'>
                     <SidebarNav>
-                       <SidebarNavItem glyph='icon-outlined-todolist' name='Account'>
+                      <SidebarNavItem glyph='icon-outlined-todolist' name='Account'>
                         <SidebarNav>
-                          <SidebarNavItem glyph='icon-outlined-todolist' name='All Account Online' href='/account/online' />
-                          <SidebarNavItem glyph='icon-outlined-todolist' name='All Account' href='/account' />
-                          <SidebarNavItem glyph='icon-outlined-todolist' name='Add New Account' href='/account/create' />
+                          <SidebarNavItem glyph='icon-outlined-todolist' name='All Account Online' href='/backend/accounts/online' />
+                          <SidebarNavItem glyph='icon-outlined-todolist' name='All Account' href='/backend/accounts' />
+                          <SidebarNavItem glyph='icon-outlined-todolist' name='Add New Account' href='/backend/accounts/create' />
                         </SidebarNav>
                       </SidebarNavItem>
                     </SidebarNav>
                   </SidebarNavItem>
                   <SidebarNavItem glyph='icon-feather-mail' name='Analytic'>
                     <SidebarNav>
-                      <SidebarNavItem glyph='icon-outlined-todolist' name='Analytic seft' href='/analytic' />
+                      <SidebarNavItem glyph='icon-outlined-todolist' name='Analytic seft' href='/backend/analytics' />
                     </SidebarNav>
                   </SidebarNavItem>
                 </SidebarNav>

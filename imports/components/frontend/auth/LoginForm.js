@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import classNames from 'classnames';
-import { Meteor } from 'meteor/meteor';
-import { Link, withRouter, browserHistory } from 'react-router';
+import { Link, withRouter } from 'react-router';
 
 import {
     Row,
@@ -23,25 +22,39 @@ import {
 } from '@sketchpixy/rubix';
 
 @withRouter
-export default class LoginForm extends Component {
-    submit = e => {
+export default class LoginForm extends React.Component {
+    back = (e) => {
         e.preventDefault();
         let email = ReactDOM.findDOMNode(this.formEmail).value;
         let password = ReactDOM.findDOMNode(this.formPassword).value;
         Meteor.loginWithPassword(email, password, (err) => {
             if (err) {
-                console.log('err', err)
+                alert('Sign up Fails');
                 this.setState({
                     error: err.reason
                 });
             } else {
-                window.location.href = window.location.origin + '/backend';
+                alert('Sign up OK');
+                window.location.href = window.location.origin;
             }
         });
     }
 
-    render() {
+    componentDidMount() {
+        $('html').addClass('authentication');
+    }
 
+    componentWillUnmount() {
+        $('html').removeClass('authentication');
+    }
+
+    getPath = (path) => {
+        var dir = this.props.location.pathname.search('rtl') !== -1 ? '' : '';
+        path = `/${dir}/${path}`;
+        return path;
+    }
+
+    render() {
         return (
             <Grid>
                 <Row>
@@ -50,17 +63,32 @@ export default class LoginForm extends Component {
                             <Panel>
                                 <PanelBody style={{ padding: 0 }}>
                                     <div className='text-center bg-darkblue fg-white'>
-                                        <h3 style={{ margin: 0, padding: 25 }}>Sign In BrandCaff</h3>
+                                        <h3 style={{ margin: 0, padding: 25 }}>Sign in to BrandCaff</h3>
+                                    </div>
+                                    <div className='bg-hoverblue fg-black50 text-center' style={{ padding: 12.5 }}>
+                                        <div>You need to sign in for those awesome features</div>
+                                        <div style={{ marginTop: 12.5, marginBottom: 12.5 }}>
+                                            <Button id='facebook-btn' lg bsStyle='darkblue' type='submit' onClick={this.back}>
+                                                <Icon glyph='icon-fontello-facebook' />
+                                                <span>Sign in <span className='hidden-xs'>with facebook</span></span>
+                                            </Button>
+                                        </div>
+                                        <div>
+                                            <a id='twitter-link' href='#' onClick={this.back}><Icon glyph='icon-fontello-google' /><span> or with google</span></a>
+                                        </div>
                                     </div>
                                     <div>
+                                        <div className='text-center' style={{ padding: 12.5 }}>
+                                            or use your BrandCaff account
+                          </div>
                                         <div style={{ padding: 25, paddingTop: 0, paddingBottom: 0, margin: 'auto', marginBottom: 25, marginTop: 25 }}>
-                                            <Form onSubmit={this.submit}>
+                                            <Form onSubmit={this.back}>
                                                 <FormGroup controlId='emailaddress'>
                                                     <InputGroup bsSize='large'>
                                                         <InputGroup.Addon>
                                                             <Icon glyph='icon-fontello-mail' />
                                                         </InputGroup.Addon>
-                                                        <FormControl autoFocus type='email' ref={(input) => this.formEmail = input} className='border-focus-blue' placeholder='hey@brandcaff.com' />
+                                                        <FormControl autoFocus type='email' className='border-focus-blue' placeholder='hey@brandcaff.com' />
                                                     </InputGroup>
                                                 </FormGroup>
                                                 <FormGroup controlId='password'>
@@ -68,14 +96,17 @@ export default class LoginForm extends Component {
                                                         <InputGroup.Addon>
                                                             <Icon glyph='icon-fontello-key' />
                                                         </InputGroup.Addon>
-                                                        <FormControl type='password' ref={(input) => this.formPassword = input} className='border-focus-blue' placeholder='password' />
+                                                        <FormControl type='password' className='border-focus-blue' placeholder='password' />
                                                     </InputGroup>
                                                 </FormGroup>
                                                 <FormGroup>
                                                     <Grid>
                                                         <Row>
-                                                            <Col xs={12} collapseLeft collapseRight className='text-center'>
-                                                                <Button outlined lg type='submit' bsStyle='blue'>Login</Button>
+                                                            <Col xs={6} collapseLeft collapseRight style={{ paddingTop: 10 }}>
+                                                                <Link to={this.getPath('signup')}>Create a BrandCaff account</Link>
+                                                            </Col>
+                                                            <Col xs={6} collapseLeft collapseRight className='text-right'>
+                                                                <Button outlined lg type='submit' bsStyle='blue' onClick={this.back}>Login</Button>
                                                             </Col>
                                                         </Row>
                                                     </Grid>
@@ -87,8 +118,8 @@ export default class LoginForm extends Component {
                             </Panel>
                         </PanelContainer>
                     </Col>
-                </Row>
-            </Grid>
+                </Row >
+            </Grid >
         );
     }
 }
