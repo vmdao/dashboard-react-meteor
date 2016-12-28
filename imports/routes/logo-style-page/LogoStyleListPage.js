@@ -18,11 +18,11 @@ import LogoStyleList from '../../components/backend/logo-style/LogoStyleList';
 
 class LogoStyleListPage extends Component {
   static propTypes = {
-    styles: React.PropTypes.array.isRequired,
+    data: React.PropTypes.array.isRequired,
   };
 
   render() {
-    let {styles} = this.props;
+    let {data} = this.props;
     return (
       <PanelContainer>
         <Panel>
@@ -31,7 +31,7 @@ class LogoStyleListPage extends Component {
               <Row>
                 <Col xs={12}>
                   <h3>Styles List</h3>
-                  <LogoStyleList styles={styles} />
+                  <LogoStyleList data={data} />
                 </Col>
               </Row>
             </Grid>
@@ -44,8 +44,8 @@ class LogoStyleListPage extends Component {
 
 export default createContainer(() => {
   Meteor.subscribe('logoStyles');
-  const styles = LogoStyles.find({}).fetch() || [];
+  const data = LogoStyles.find({}).fetch() || [];
   return {
-    styles: styles,
+    data: data,
   };
 }, LogoStyleListPage);

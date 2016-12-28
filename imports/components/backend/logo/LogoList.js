@@ -13,17 +13,17 @@ import {
 @withRouter
 class Logo extends Component {
   edit = () => {
-    this.props.router.push(`/logo/edit/${this.props.logo._id}`);
+    this.props.router.push(`/backend/logos/edit/${this.props.data._id}`);
   }
   render() {
-    let {logo} = this.props;
-    if (!logo) return;
+    let {data} = this.props;
+    if (!data) return;
     return (
       <tr onClick={this.edit}>
-        <td>{logo.name}</td>
-        <td>{logo.code}</td>
-        <td>{logo.keyword}</td>
-        <td>{logo.active}</td>
+        <td>{data.name}</td>
+        <td>{data.code}</td>
+        <td>{data.keyword}</td>
+        <td>{data.active}</td>
       </tr>
     );
   }
@@ -31,7 +31,7 @@ class Logo extends Component {
 
 class LogoList extends Component {
   static propTypes = {
-    logos: React.PropTypes.array,
+    data: React.PropTypes.array,
   };
   componentDidMount() {
     // $(ReactDOM.findDOMNode(this.table)).dataTable({
@@ -42,8 +42,8 @@ class LogoList extends Component {
     // });
   }
   render() {
-    let {logos} = this.props;
-    if (logos.length === 0) return null;
+    let {data} = this.props;
+    if (data.length === 0) return null;
     return (
       <Grid>
         <Row>
@@ -58,8 +58,8 @@ class LogoList extends Component {
             </thead>
             <tbody>
               {
-                logos.map(logo => {
-                  return <Logo logo={logo} key={logo._id} />
+                data.map(item => {
+                  return <Logo data={item} key={item._id} />
                 })
               }
             </tbody>

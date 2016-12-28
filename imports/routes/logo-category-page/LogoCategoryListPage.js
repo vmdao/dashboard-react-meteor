@@ -18,11 +18,11 @@ import LogoCategoryList from '../../components/backend/logo-category/LogoCategor
 
 class LogoCategoryListPage extends Component {
   static propTypes = {
-    categories: React.PropTypes.array.isRequired,
+    data: React.PropTypes.array.isRequired,
   };
 
   render() {
-    let {categories} = this.props;
+    let {data} = this.props;
     return (
       <PanelContainer>
         <Panel>
@@ -31,7 +31,7 @@ class LogoCategoryListPage extends Component {
               <Row>
                 <Col xs={12}>
                   <h3>Categories List:</h3>
-                  <LogoCategoryList categories={categories} />
+                  <LogoCategoryList data={data} />
                 </Col>
               </Row>
             </Grid>
@@ -46,6 +46,6 @@ export default createContainer(() => {
   Meteor.subscribe('logoCategories');
   const categories = LogoCategories.find({}).fetch() || [];
   return {
-    categories: categories,
+    data: categories,
   };
 }, LogoCategoryListPage);

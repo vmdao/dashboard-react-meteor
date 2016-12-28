@@ -18,11 +18,11 @@ import LogoStyleEdit from '../../components/backend/logo-style/LogoStyleEdit';
 
 class LogoStyleEditPage extends Component {
     static propTypes = {
-        style: React.PropTypes.object,
+        data: React.PropTypes.object,
     };
     render() {
-        let { style } = this.props;
-        if (!style) return null;
+        let { data } = this.props;
+        if (!data) return null;
         return (
             <PanelContainer>
                 <Panel>
@@ -31,7 +31,7 @@ class LogoStyleEditPage extends Component {
                             <Row>
                                 <Col xs={12}>
                                     <h3>Edit Style</h3>
-                                    <LogoStyleEdit style={style} />
+                                    <LogoStyleEdit data={data} />
                                 </Col>
                             </Row>
                         </Grid>
@@ -47,6 +47,6 @@ export default createContainer(({ params }) => {
     let _id = id;
     Meteor.subscribe('logoStyles', _id);
     return {
-        style: LogoStyles.find({ _id }).fetch()[0],
+        data: LogoStyles.find({ _id }).fetch()[0],
     };
 }, LogoStyleEditPage);

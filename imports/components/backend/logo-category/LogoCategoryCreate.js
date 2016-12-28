@@ -31,7 +31,6 @@ export default class LogoCategoryCreate extends Component {
         });
         return;
       }
-    
       Meteor.call('logoSuggestOrders.createCategory', {category: res}, (err, res)=>{
          if (err) {
             this.setState({
@@ -44,10 +43,6 @@ export default class LogoCategoryCreate extends Component {
       })
      
     }); 
-    analytics.track( 'Created a new category', {
-      title: 'Testing out analytics'
-    });
-
   }
   render() {
     let errors = this.state.errors.length ?

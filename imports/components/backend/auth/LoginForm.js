@@ -30,7 +30,6 @@ export default class LoginForm extends Component {
         let password = ReactDOM.findDOMNode(this.formPassword).value;
         Meteor.loginWithPassword(email, password, (err) => {
             if (err) {
-                console.log('err', err)
                 this.setState({
                     error: err.reason
                 });

@@ -8,25 +8,20 @@ Meteor.methods({
   'logos.remove'(_id) {
   return  Logos.remove({ _id });
   },
-  'logos.create'(code, active, name, keyword) {
-    check(active, String);
-    check(code, String);
-    check(name, String);
-    check(keyword, String);
+  'logos.create'(data) {
+   let {code} = data;
 
     if (code.length <= 0) {
       throw new Meteor.Error(403, `'logos' should not be empty!`);
       return;
     }
-
-   return Logos.insert({ code, active, name, keyword });
+    
+   return Logos.insert(data);
   },
 
-  'logos.update'(_id, active, name, keyword) {
-    check(active, String);
-    check(name, String);
-    check(keyword, String);
-   return  Logos.update({ _id }, { $set: { active, name, keyword } });
+  'logos.update'(_id, data) {
+    
+   return  Logos.update({ _id }, { $set: data });
   }
 });
 

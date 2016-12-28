@@ -12,13 +12,14 @@ import {
 @withRouter
 class LogoType extends Component {
   edit = () => {
-    this.props.router.push(`/bankend/logo-types/edit/${this.props.data._id}`);
+    this.props.router.push(`/backend/logo-types/edit/${this.props.data._id}`);
   }
   render() {
     let data = this.props.data;
     if (!data) return;
     return (
-      <tr onClick={this.edit}>
+      <tr onClick={this.edit} style={data.active == 0 ?{backgroundColor: '#f5f5f5'}: {}}>
+        <td><img src={data.featureImg} className="img-thumbnail" width="150" height="60" /></td>
         <td>{data.name}</td>
         <td>{data.code}</td>
         <td>{data.keyword}</td>
@@ -49,6 +50,7 @@ export default class LogoTypeList extends Component {
           <Table ref={(c) => this.table = c} className='display' cellSpacing='0' width='100%'>
             <thead>
               <tr>
+                <th>Feature</th>
                 <th>Name</th>
                 <th>Code</th>
                 <th>Keyword</th>

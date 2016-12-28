@@ -24,7 +24,7 @@ export default  class LogoCategoryEdit extends Component {
     let formActive = ReactDOM.findDOMNode(this.formActive).value;
     let formKeyword = ReactDOM.findDOMNode(this.formKeyword).value;
     let formName = ReactDOM.findDOMNode(this.formName).value;
-    let { _id } = this.props.category;
+    let { _id } = this.props.data;
     Meteor.call('logoCategories.update', _id, formActive, formName, formKeyword, (err, res) => {
       if (err) {
         this.setState({
@@ -32,6 +32,7 @@ export default  class LogoCategoryEdit extends Component {
         });
         return;
       }
+      alert('OK');
       this.setState({ errors: [] });
     });
 
@@ -45,8 +46,8 @@ export default  class LogoCategoryEdit extends Component {
           })}
         </Alert>
       ) : null;
-    let {category} = this.props;
-    if (!category) return;
+    let {data} = this.props;
+    if (!data) return;
     return (
       <div>
         {errors}
@@ -58,7 +59,7 @@ export default  class LogoCategoryEdit extends Component {
                   Code
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="text" placeholder="0001" defaultValue={category.code} ref={(input) => this.formCode = input} />
+                  <FormControl type="text" placeholder="0001" defaultValue={data.code} ref={(input) => this.formCode = input} />
                 </Col>
               </FormGroup>
               <FormGroup controlId="formControlsSelect" >
@@ -66,7 +67,7 @@ export default  class LogoCategoryEdit extends Component {
                   Active
                 </Col>
                 <Col sm={10}>
-                  <FormControl componentClass="select" placeholder="select" defaultValue={category.active} ref={(input) => this.formActive = input} >
+                  <FormControl componentClass="select" placeholder="select" defaultValue={data.active} ref={(input) => this.formActive = input} >
                     <option value="1">On</option>
                     <option value="0">Off</option>
                   </FormControl>
@@ -78,7 +79,7 @@ export default  class LogoCategoryEdit extends Component {
                   Name
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="text" placeholder="Education" defaultValue={category.name} ref={(input) => this.formName = input} />
+                  <FormControl type="text" placeholder="Education" defaultValue={data.name} ref={(input) => this.formName = input} />
                 </Col>
               </FormGroup>
               <FormGroup controlId="formKeyword">
@@ -86,7 +87,7 @@ export default  class LogoCategoryEdit extends Component {
                   Keyword
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="text" placeholder="Education, school, trainning" defaultValue={category.keyword} ref={(input) => this.formKeyword = input} />
+                  <FormControl type="text" placeholder="Education, school, trainning" defaultValue={data.keyword} ref={(input) => this.formKeyword = input} />
                 </Col>
               </FormGroup>
               <FormGroup controlId="formSubmit">

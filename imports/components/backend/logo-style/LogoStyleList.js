@@ -13,17 +13,18 @@ import {
 @withRouter
 class LogoStyle extends Component {
   edit = () => {
-    this.props.router.push(`/backend/logo-styles/edit/${this.props.style._id}`);
+    this.props.router.push(`/backend/logo-styles/edit/${this.props.data._id}`);
   }
   render() {
-    let {style} = this.props;
-    if (!style) return;
+    let {data} = this.props;
+    if (!data) return;
     return (
-      <tr onClick={this.edit}>
-        <td>{style.name}</td>
-        <td>{style.code}</td>
-        <td>{style.keyword}</td>
-        <td>{style.active}</td>
+      <tr onClick={this.edit} style={data.active == 0 ?{backgroundColor: '#f5f5f5'}: {}}>
+        <td><img src={data.featureImg} className="img-thumbnail" width="150" height="60" /></td>
+        <td>{data.name}</td>
+        <td>{data.code}</td>
+        <td>{data.keyword}</td>
+        <td>{data.active}</td>
       </tr>
     );
   }
@@ -31,7 +32,7 @@ class LogoStyle extends Component {
 
 export default  class LogoStyleList extends Component {
   static propTypes = {
-    styles: React.PropTypes.array,
+    data: React.PropTypes.array,
   };
   componentDidMount() {
     // $(ReactDOM.findDOMNode(this.table)).dataTable({
@@ -42,14 +43,15 @@ export default  class LogoStyleList extends Component {
     // });
   }
   render() {
-    let {styles} = this.props;
-    if (styles.length === 0) return null;
+    let {data} = this.props;
+    if (data.length === 0) return null;
     return (
       <Grid>
         <Row>
           <Table ref={(c) => this.table = c} className='display' cellSpacing='0' width='100%'>
             <thead>
               <tr>
+                <th>Feature</th>
                 <th>Name</th>
                 <th>Code</th>
                 <th>Keyword</th>
@@ -58,8 +60,8 @@ export default  class LogoStyleList extends Component {
             </thead>
             <tbody>
               {
-                styles.map(style => {
-                  return <LogoStyle style={style} key={style._id} />
+                data.map(item => {
+                  return <LogoStyle data={item} key={item._id} />
                 })
               }
             </tbody>

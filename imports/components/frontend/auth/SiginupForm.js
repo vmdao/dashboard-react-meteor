@@ -25,7 +25,9 @@ import {
 export default class SignupForm extends React.Component {
     back = (e) => {
         e.preventDefault();
-
+        analytics.track( '[BTN]Signup', {
+            title: 'Click Button Signup'
+        });
         let username = ReactDOM.findDOMNode(this.formUsername).value;
         let email = ReactDOM.findDOMNode(this.formEmail).value;
         let password = ReactDOM.findDOMNode(this.formPassword).value;
@@ -53,7 +55,7 @@ export default class SignupForm extends React.Component {
 
     getPath = (path) => {
         var dir = this.props.location.pathname.search('rtl') !== -1 ? '' : '';
-        path = `/${dir}/${path}`;
+        path = window.location.origin + `${dir}/${path}`;
         return path;
     }
 

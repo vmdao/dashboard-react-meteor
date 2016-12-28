@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import LogoWorkspace from './LogoWorkspace';
+
 import {
   Row,
   Col,
@@ -14,28 +15,48 @@ import {
   ControlLabel,
 } from '@sketchpixy/rubix';
 
-class LogoCreate extends Component {
+export default class LogoCreate extends Component {
+  static propTypes = {
+    data: React.PropTypes.array.isRequired,
+  };
   state = {
     errors: []
   };
   create = (e) => {
     e.preventDefault();
-    let formCode = ReactDOM.findDOMNode(this.formCode).value;
-    let formActive = ReactDOM.findDOMNode(this.formActive).value;
-    let formKeyword = ReactDOM.findDOMNode(this.formKeyword).value;
-    let formName = ReactDOM.findDOMNode(this.formName).value;
-    Meteor.call('logos.create', formCode, formActive, formName, formKeyword, (err, res) => {
+    const data = {
+      code: ReactDOM.findDOMNode(this.formCode).value,
+      active: ReactDOM.findDOMNode(this.formActive).value,
+      keyword: ReactDOM.findDOMNode(this.formKeyword).value,
+      name: ReactDOM.findDOMNode(this.formName).value,
+      category:  ReactDOM.findDOMNode(this.formCategories).value,
+      style:  ReactDOM.findDOMNode(this.formStyles).value,
+      type:  ReactDOM.findDOMNode(this.formTypes).value,
+      tag: ReactDOM.findDOMNode(this.formTags).value,
+    }
+    Meteor.call('logos.create', data, (err, res) => {
       if (err) {
         this.setState({
           errors: [].concat(err),
         });
         return;
       }
+      const logoSuggestOrdersData = {
+        'category._id': data.category,
+        'style._id': data.style,
+        'type._id': data.type,
+      }
+      Meteor.call('logoSuggestOrders.updateCount', logoSuggestOrdersData, (err, res) =>{
+
+      })
+      alert('OK');
       this.setState({ errors: [] });
     });
 
   }
+
   render() {
+
     let errors = this.state.errors.length ?
       (
         <Alert danger dismissible>
@@ -69,7 +90,55 @@ class LogoCreate extends Component {
                   </FormControl>
                 </Col>
               </FormGroup>
-
+              <FormGroup controlId="formCategories">
+                <Col componentClass={ControlLabel} sm={2}>
+                  Categories
+                </Col>
+                <Col sm={10}>
+                  <FormControl componentClass="select" placeholder="select" ref={(input) => this.formCategories = input} >
+                    {this.props.data.categories.map(category=>{
+                        return (<option value={category._id}>{category.name}</option>)
+                    })}
+                  </FormControl>
+                </Col>
+              </FormGroup>
+              <FormGroup controlId="formStyles">
+                <Col componentClass={ControlLabel} sm={2}>
+                  Styles
+                </Col>
+                <Col sm={10}>
+                  <FormControl componentClass="select" placeholder="select" ref={(input) => this.formStyles = input} >
+                    {this.props.data.styles.map(style=>{
+                        return (<option value={style._id}>{style.name}</option>)
+                    })}
+                  </FormControl>
+                </Col>
+              </FormGroup>
+              <FormGroup controlId="formTypes">
+                <Col componentClass={ControlLabel} sm={2}>
+                  Types
+                </Col>
+                <Col sm={10}>
+                  <FormControl componentClass="select" placeholder="select" ref={(input) => this.formTypes = input} >
+                    {this.props.data.types.map(type=>{
+                        return (<option value={type._id}>{type.name}</option>)
+                    })}
+                  </FormControl>
+                </Col>
+              </FormGroup>
+              <FormGroup controlId="formTags">
+                <Col componentClass={ControlLabel} sm={2}>
+                  Tags
+                </Col>
+                <Col sm={10}>
+                  <FormControl componentClass="select" placeholder="select" ref={(input) => this.formTags = input} multiple>
+                    {this.props.data.tags.map(tag=>{
+                        return (<option value={tag._id}>{tag.name}</option>)
+                    })}
+                  </FormControl>
+                </Col>
+              </FormGroup>
+              
               <FormGroup controlId="formName">
                 <Col componentClass={ControlLabel} sm={2}>
                   Name
@@ -104,4 +173,3 @@ class LogoCreate extends Component {
   }
 }
 
-export default LogoCreate;

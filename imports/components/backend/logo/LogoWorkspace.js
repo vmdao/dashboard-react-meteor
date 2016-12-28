@@ -16,13 +16,13 @@ class LogoWorkspace extends Component {
     };
     upload = (files) => {
         files.forEach(file => {
-            console.log(4567, file)
+    
             //file.owner = Meteor.userId(); //before upload also save the owner of that file
             SvgFiles.insert(file, (err, fileObj) => {
                 if (err) {
                     console.log(err); //in case there is an error, log it to the console
                 } else {
-                    console.log(1234, fileObj);
+                
                     this.addShape(file.preview);
                 }
             });

@@ -17,11 +17,11 @@ import AccountEdit from '../../components/backend/account/AccountEdit';
 
 class AccountEditPage extends Component {
     static propTypes = {
-        account: React.PropTypes.object,
+        data: React.PropTypes.object,
     };
     render() {
-        let { account } = this.props;
-        if (!account) return null;
+        let { data } = this.props;
+        if (!data) return null;
         return (
             <PanelContainer>
                 <Panel>
@@ -29,8 +29,8 @@ class AccountEditPage extends Component {
                         <Grid>
                             <Row>
                                 <Col xs={12}>
-                                    <h3>Edit Category:</h3>
-                                    <AccountEdit account={account} />
+                                    <h3>Edit Account:</h3>
+                                    <AccountEdit data={data} />
                                 </Col>
                             </Row>
                         </Grid>
@@ -46,6 +46,6 @@ export default createContainer(({ params }) => {
     let _id = id;
     Meteor.subscribe('account', _id);
     return {
-        account: Meteor.users.find({ _id}).fetch()[0],
+        data: Meteor.users.find({ _id}).fetch()[0],
     };
 }, AccountEditPage);

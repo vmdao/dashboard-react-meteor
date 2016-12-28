@@ -25,7 +25,6 @@ class AccountCreate extends Component {
     let formUsername = ReactDOM.findDOMNode(this.formUsername).value;
     let formFullname = ReactDOM.findDOMNode(this.formFullname).value;
     let formPassword = ReactDOM.findDOMNode(this.formPassword).value;
-    console.log(Accounts)
     Accounts.createUser({email: formEmail, fullname: formFullname, username: formUsername, password: formPassword, active: formActive}, (err) => {
       if(err){
          this.setState({
@@ -86,7 +85,7 @@ class AccountCreate extends Component {
                   Username
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="text" placeholder="Education, school, trainning" ref={(input) => this.formUsername = input} />
+                  <FormControl type="text" placeholder="" ref={(input) => this.formUsername = input} />
                 </Col>
               </FormGroup>
                <FormGroup controlId="formPassword">
@@ -94,7 +93,7 @@ class AccountCreate extends Component {
                   Password
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="password" placeholder="Education, school, trainning" ref={(input) => this.formPassword = input} />
+                  <FormControl type="password" placeholder="" ref={(input) => this.formPassword = input} />
                 </Col>
               </FormGroup>
               <FormGroup controlId="formSubmit">

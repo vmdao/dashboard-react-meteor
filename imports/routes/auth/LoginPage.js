@@ -3,6 +3,9 @@ import LoginForm from '../../components/frontend/auth/LoginForm';
 export default class AuthenticationPage extends Component {
 
   render() {
+    analytics.track( '[PAGE]Login', {
+        title: 'Page Login'
+    });
     const style = {
       top: 0,
       left: 0,

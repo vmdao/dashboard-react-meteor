@@ -13,17 +13,17 @@ import {
 @withRouter
 class  LogoCategory extends Component {
   edit = () => {
-    this.props.router.push(`/backend/logo-categories/edit/${this.props.category._id}`);
+    this.props.router.push(`/backend/logo-categories/edit/${this.props.data._id}`);
   }
   render() {
-    let {category} = this.props;
-    if (!category) return;
+    let {data} = this.props;
+    if (!data) return;
     return (
-      <tr onClick={this.edit}>
-        <td>{category.name}</td>
-        <td>{category.code}</td>
-        <td>{category.keyword}</td>
-        <td>{category.active}</td>
+      <tr onClick={this.edit} style={data.active == 0 ?{backgroundColor: '#f5f5f5'}: {}}>
+        <td>{data.name}</td>
+        <td>{data.code}</td>
+        <td>{data.keyword}</td>
+        <td>{data.active}</td>
       </tr>
     );
   }
@@ -31,7 +31,7 @@ class  LogoCategory extends Component {
 
 export default class CategoryList extends Component {
   static propTypes = {
-    categories: React.PropTypes.array,
+    data: React.PropTypes.array,
   };
   componentDidMount() {
     // $(ReactDOM.findDOMNode(this.table)).dataTable({
@@ -42,8 +42,8 @@ export default class CategoryList extends Component {
     // });
   }
   render() {
-    let {categories} = this.props;
-    if (categories.length === 0) return null;
+    let {data} = this.props;
+    if (data.length === 0) return null;
     return (
       <Grid>
         <Row>
@@ -58,8 +58,8 @@ export default class CategoryList extends Component {
             </thead>
             <tbody>
               {
-                categories.map(category => {
-                  return <LogoCategory category={category} key={category._id} />
+                data.map(item => {
+                  return <LogoCategory data={item} key={item._id} />
                 })
               }
             </tbody>

@@ -1,10 +1,10 @@
 
 import { FS } from 'meteor/cfs:base-package';
-export const SvgFiles = new FS.Collection('svgs', {
-  stores: [new FS.Store.FileSystem('svgs', { path: '~/uploads' })]
+export const ImageFiles = new FS.Collection('images', {
+  stores: [new FS.Store.FileSystem('images', { path: '~/uploads' })]
 });
 
-SvgFiles.allow({
+ImageFiles.allow({
   'insert': function () {
     // add custom authentication code here
     return true;

@@ -11,11 +11,19 @@ import {
     PanelContainer,
 } from '@sketchpixy/rubix';
 
+import { LogoCategories } from '../../api/LogoCategories';
+import { LogoStyles } from '../../api/LogoStyles';
+import { LogoTypes } from '../../api/LogoTypes';
+import { LogoTags } from '../../api/LogoTags';
+
 import LogoCreate from '../../components/backend/logo/LogoCreate';
 
 class LogoCreatePage extends Component {
-
+    static propTypes = {
+        data: React.PropTypes.array.isRequired,
+    };
     render() {
+        let {data} = this.props;
         return (
             <PanelContainer>
                 <Panel>
@@ -23,8 +31,8 @@ class LogoCreatePage extends Component {
                         <Grid>
                             <Row>
                                 <Col xs={12}>
-                                    <h3>Add New Style</h3>
-                                    <LogoCreate />
+                                    <h3>Add New Logo</h3>
+                                    <LogoCreate data={data}/>
                                 </Col>
                             </Row>
                         </Grid>
@@ -35,4 +43,20 @@ class LogoCreatePage extends Component {
     }
 }
 
-export default LogoCreatePage;
+export default createContainer(() => {
+  Meteor.subscribe('logoCategories');
+  Meteor.subscribe('logoStyles');
+  Meteor.subscribe('logoTypes');
+  Meteor.subscribe('logoTags');
+  const data = {
+    categories: LogoCategories.find({}).fetch() || [],
+    styles: LogoStyles.find({}).fetch() || [],
+    types: LogoTypes.find({}).fetch() || [],
+    tags: LogoTags.find({}).fetch() || [],
+  }
+ 
+  return {
+    data: data,
+  };
+}, LogoCreatePage);
+

@@ -14,7 +14,7 @@ import {
   ControlLabel,
 } from '@sketchpixy/rubix';
 
-class AccountEdit extends Component {
+export default class AccountEdit extends Component {
   state = {
     errors: []
   };
@@ -24,7 +24,7 @@ class AccountEdit extends Component {
     let formActive = ReactDOM.findDOMNode(this.formActive).value;
     let formKeyword = ReactDOM.findDOMNode(this.formKeyword).value;
     let formName = ReactDOM.findDOMNode(this.formName).value;
-    let { _id } = this.props.category;
+    let { _id } = this.props.data;
     Meteor.call('accounts.update', _id, formActive, formName, formKeyword, (err, res) => {
       if (err) {
         this.setState({
@@ -45,28 +45,28 @@ class AccountEdit extends Component {
           })}
         </Alert>
       ) : null;
-    let {account} = this.props;
-    if (!account) return;
+    let {data} = this.props;
+    if (!data) return;
     return (
       <div>
         {errors}
         <Form horizontal onSubmit={this.update}>
           <FormGroup>
             <Col sm={10}>
-              <FormGroup controlId="formCode">
+              <FormGroup controlId="formEmail">
                 <Col componentClass={ControlLabel} sm={2}>
-                  Code
+                  Email
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="text" placeholder="0001" defaultValue={account.code} ref={(input) => this.formCode = input} />
+                  <FormControl type="email" placeholder="hey@brandcaff" defaultValue={data.emails[0].address}  ref={(input) => this.formEmail = input} />
                 </Col>
               </FormGroup>
-              <FormGroup controlId="formControlsSelect" >
+              <FormGroup controlId="formControlsSelect">
                 <Col componentClass={ControlLabel} sm={2}>
                   Active
                 </Col>
                 <Col sm={10}>
-                  <FormControl componentClass="select" placeholder="select" defaultValue={account.active} ref={(input) => this.formActive = input} >
+                  <FormControl componentClass="select" placeholder="select" ref={(input) => this.formActive = input} >
                     <option value="1">On</option>
                     <option value="0">Off</option>
                   </FormControl>
@@ -75,24 +75,25 @@ class AccountEdit extends Component {
 
               <FormGroup controlId="formName">
                 <Col componentClass={ControlLabel} sm={2}>
-                  Name
+                  Fullname
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="text" placeholder="Education" defaultValue={account.name} ref={(input) => this.formName = input} />
+                  <FormControl type="text" placeholder="Minh Dao Vu" defaultValue={data.fullname}  ref={(input) => this.formFullname = input} />
                 </Col>
               </FormGroup>
-              <FormGroup controlId="formKeyword">
+              <FormGroup controlId="formUsername">
                 <Col componentClass={ControlLabel} sm={2}>
-                  Keyword
+                  Username
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="text" placeholder="Education, school, trainning" defaultValue={account.keyword} ref={(input) => this.formKeyword = input} />
+                  <FormControl type="text" placeholder="" defaultValue={data.username} ref={(input) => this.formUsername = input} />
                 </Col>
               </FormGroup>
+      
               <FormGroup controlId="formSubmit">
                 <Col smOffset={2} sm={10}>
                   <Button type="submit">
-                    Update
+                    UPDATE
 		              </Button>
                 </Col>
               </FormGroup>
@@ -104,4 +105,3 @@ class AccountEdit extends Component {
   }
 }
 
-export default AccountEdit;

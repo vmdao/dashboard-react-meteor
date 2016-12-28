@@ -31,6 +31,7 @@ export default class LogoSuggestOrder extends Component {
         });
         return;
       }
+      alert('OK');
       this.setState({ errors: [] });
     }); 
   }

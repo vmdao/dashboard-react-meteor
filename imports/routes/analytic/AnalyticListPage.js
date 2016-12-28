@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
-import { Tracker } from 'meteor/tracker';
-import { compose } from 'react-komposer';
+
 import {
   Row,
   Col,
@@ -42,22 +41,11 @@ class AnalyticListPage extends Component {
   }
 }
 
-// export default createContainer(() => {
-//   Meteor.subscribe('analytics');
-//   const analytics = Analytics.find().fetch() || [];
-//   console.log(456, analytics)
-//   return {
-//     analytics: analytics,
-//   };
-// }, AnalyticListPage);
-function composer(props, onData) {
-  console.log(321, VisitTracker.visits.find().fetch());
-  Tracker.autorun(() => {
-    onData(null, {
-      data: VisitTracker.visits.find().fetch(),
-    });
-  })
-
-}
-
-export default compose(composer)(AnalyticListPage);
+export default createContainer(() => {
+  Meteor.subscribe('users.alalytics');
+  const analytics = VisitTracker.visits.find().fetch()||[];
+  console.log('users.alalytics', analytics)
+  return {
+    data: analytics,
+  };
+}, AnalyticListPage);

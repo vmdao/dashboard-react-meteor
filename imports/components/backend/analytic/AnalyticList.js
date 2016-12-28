@@ -12,15 +12,25 @@ import {
 
 @withRouter
 class Analytic extends Component {
-  edit = () => {
-    this.props.router.push(`/analytic/${this.props.analytic._id}`);
-  }
   render() {
     let {data} = this.props;
     if (!data) return;
+    let {trafficSource} = data;
+    let {userAgent} = data;
+    let {browser} = userAgent;
+    let {device} = userAgent;
+    let browserString = JSON.stringify( browser, null, 2);
+    let deviceString = JSON.stringify( device, null, 2);
+    let trafficSourceString = JSON.stringify( trafficSource, null, 2);
+    console.log(typeof data.createdAt);
     return (
-      <tr onClick={this.edit}>
+      <tr>
+        <td>{data.ipAddress}</td>
         <td>{data.referer}</td>
+        <td>{browserString}</td>
+        <td>{deviceString}</td>
+        <td></td>
+        <td>{trafficSourceString}</td>
       </tr>
     );
   }
@@ -34,12 +44,11 @@ export default class AnalyticList extends Component {
     $(ReactDOM.findDOMNode(this.table)).dataTable({
       responsive: true,
       columnDefs: [
-        { targets: [-1, -3], className: 'dt-body-right' }
+        {className: 'dt-body-right' }
       ]
     });
   }
   render() {
-    console.log(12, this.props)
     let {data} = this.props;
     if (data.length === 0) return null;
     return (
@@ -48,10 +57,12 @@ export default class AnalyticList extends Component {
           <Table ref={(c) => this.table = c} className='display' cellSpacing='0' width='100%'>
             <thead>
               <tr>
-                <th>Fullname</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Active</th>
+                <th>IP</th>
+                <th>Referer</th>
+                <th>Browser</th>
+                <th>Device</th>
+                <th>Time</th>
+                <th>Description</th>
               </tr>
             </thead>
             <tbody>

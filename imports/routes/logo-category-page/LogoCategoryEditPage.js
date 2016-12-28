@@ -18,11 +18,11 @@ import LogoCategoryEdit from '../../components/backend/logo-category/LogoCategor
 
 class LogoCategoryEditPage extends Component {
     static propTypes = {
-        category: React.PropTypes.object,
+        data: React.PropTypes.object,
     };
     render() {
-        let { category } = this.props;
-        if (!category) return null;
+        let { data } = this.props;
+        if (!data) return null;
         return (
             <PanelContainer>
                 <Panel>
@@ -31,7 +31,7 @@ class LogoCategoryEditPage extends Component {
                             <Row>
                                 <Col xs={12}>
                                     <h3>Edit Category:</h3>
-                                    <LogoCategoryEdit category={category} />
+                                    <LogoCategoryEdit data={data} />
                                 </Col>
                             </Row>
                         </Grid>
@@ -47,6 +47,6 @@ export default createContainer(({ params }) => {
     let _id = id;
     Meteor.subscribe('logoCategories', _id);
     return {
-        category: LogoCategories.find({ _id }).fetch()[0],
+        data: LogoCategories.find({ _id }).fetch()[0],
     };
 }, LogoCategoryEditPage);

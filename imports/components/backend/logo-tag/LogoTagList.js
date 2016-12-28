@@ -19,7 +19,7 @@ class LogoTag extends Component {
     let {data} = this.props;
     if (!data) return;
     return (
-      <tr onClick={this.edit}>
+      <tr onClick={this.edit} style={data.active == 0 ?{backgroundColor: '#f5f5f5'}: {}}>
         <td>{data.name}</td>
         <td>{data.code}</td>
         <td>{data.keyword}</td>

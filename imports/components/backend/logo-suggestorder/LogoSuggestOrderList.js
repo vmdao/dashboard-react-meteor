@@ -21,7 +21,7 @@ class LogoSuggestOrder extends Component {
     let style = data.style || {};
     let type = data.type || {};
     return (
-      <tr onClick={this.edit}>
+      <tr onClick={this.edit} style={data.active == 0 ?{backgroundColor: '#f5f5f5'}: {}}>
         <td>{category.name}</td>
         <td>{style.name}</td>
         <td>{type.name}</td>

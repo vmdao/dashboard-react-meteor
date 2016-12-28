@@ -8,25 +8,17 @@ Meteor.methods({
   'logoStyles.remove'(_id) {
    return LogoStyles.remove({ _id });
   },
-  'logoStyles.create'(code, active, name, keyword) {
-    check(active, String);
-    check(code, String);
-    check(name, String);
-    check(keyword, String);
-
+  'logoStyles.create'(data) {
+    let {code} = data;
     if (code.length <= 0) {
       throw new Meteor.Error(403, `'logoStyles' should not be empty!`);
       return;
     }
-
-   return LogoStyles.insert({ code, active, name, keyword });
+   return LogoStyles.insert(data);
   },
 
-  'logoStyles.update'(_id, active, name, keyword) {
-    check(active, String);
-    check(name, String);
-    check(keyword, String);
-    return LogoStyles.update({ _id }, { $set: { active, name, keyword } });
+  'logoStyles.update'(_id, data) {
+    return LogoStyles.update({ _id }, { $set: data });
   }
 });
 

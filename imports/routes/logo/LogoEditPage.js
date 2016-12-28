@@ -13,16 +13,21 @@ import {
 } from '@sketchpixy/rubix';
 
 import { Logos } from '../../api/Logos';
+import { LogoCategories } from '../../api/LogoCategories';
+import { LogoStyles } from '../../api/LogoStyles';
+import { LogoTypes } from '../../api/LogoTypes';
+import { LogoTags } from '../../api/LogoTags';
+
 import LogoEdit from '../../components/backend/logo/LogoEdit';
 
 
 class LogoEditPage extends Component {
     static propTypes = {
-        logo: React.PropTypes.object,
+        data: React.PropTypes.object,
     };
     render() {
-        let { logo } = this.props;
-        if (!logo) return null;
+        let { data } = this.props;
+        if (!data) return null;
         return (
             <PanelContainer>
                 <Panel>
@@ -31,7 +36,7 @@ class LogoEditPage extends Component {
                             <Row>
                                 <Col xs={12}>
                                     <h3>Edit Logo</h3>
-                                    <LogoEdit logo={logo} />
+                                    <LogoEdit data={data} />
                                 </Col>
                             </Row>
                         </Grid>
@@ -45,8 +50,20 @@ class LogoEditPage extends Component {
 export default createContainer(({ params }) => {
     let { id } = params;
     let _id = id;
-    Meteor.subscribe('logos', _id);
+    Meteor.subscribe('logoCategories');
+    Meteor.subscribe('logoStyles');
+    Meteor.subscribe('logoTypes');
+    Meteor.subscribe('logoTags');
+    Meteor.subscribe('logo', _id);
+    const data = {
+        categories: LogoCategories.find({}).fetch() || [],
+        styles: LogoStyles.find({}).fetch() || [],
+        types: LogoTypes.find({}).fetch() || [],
+        tags: LogoTags.find({}).fetch() || [],
+        logo: Logos.find({ _id }).fetch()[0],
+    }
+    console.log('store', data);
     return {
-        style: Logos.find({ _id }).fetch()[0],
+        data: data
     };
 }, LogoEditPage);

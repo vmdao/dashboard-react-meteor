@@ -10,26 +10,24 @@ import {
 } from '@sketchpixy/rubix';
 
 @withRouter
+
 class Account extends Component {
-  edit = () => {
-    this.props.router.push(`/account/edit/${this.props.account._id}`);
-  }
   render() {
-    let {account} = this.props;
-    if (!account) return;
-    let {status} = account;
+    let {data} = this.props;
+    if (!data) return;
+    let {status} = data;
     let {lastLogin} = status
     return (
 
-      <tr onClick={this.edit}>
-        <td>{account.fullname}</td>
-        <td>{account.username}</td>
-        <td>{account.emails[0].address}</td>
-        <td>{account.active}</td>
+      <tr>
+        <td>{data.fullname}</td>
+        <td>{data.username}</td>
+        <td>{data.emails[0].address}</td>
+        <td>{data.active}</td>
         <td>{lastLogin.ipAddr}</td>
         <td>{status.online}</td>
-        <td>{lastLogin.date}</td>
-        <td>{account.createdAt.toString()}</td>
+        <td></td>
+        <td></td>
       </tr>
     );
   }
@@ -38,7 +36,7 @@ class Account extends Component {
 
 export default class AccountList extends Component {
   static propTypes = {
-    accounts: React.PropTypes.array,
+    data: React.PropTypes.array,
   };
   componentDidMount() {
     // $(ReactDOM.findDOMNode(this.table)).dataTable({
@@ -49,8 +47,8 @@ export default class AccountList extends Component {
     // });
   }
   render() {
-    let {accounts} = this.props;
-    if (accounts.length === 0) return null;
+    let {data} = this.props;
+    if (data.length < 1) return null;
     return (
       <Grid>
         <Row>
@@ -69,8 +67,8 @@ export default class AccountList extends Component {
             </thead>
             <tbody>
               {
-                accounts.map(account => {
-                  return <Account account={account} key={account._id} />
+                data.map(item => {
+                  return <Account data={item} key={item._id} />
                 })
               }
             </tbody>

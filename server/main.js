@@ -18,10 +18,20 @@ Meteor.startup(() => {
   } else {
     console.log('--------------------RUN DEVELOPMENT--------------------')
   }
-  Meteor.publish("userStatus", function() {
-    return Meteor.users.find({ "status.online": true });
-  });
+  
+  if (Meteor.isServer) {
+      Meteor.publish("userStatus", function() {
+        return Meteor.users.find({ "status.online": true });
+      });
 
+      Meteor.publish("users", function() {
+        return Meteor.users.find();
+      });
+    
+      Meteor.publish("users.alalytics", function() {
+        return VisitTracker.visits.find();
+      });
+  }
   WebApp.addHtmlAttributeHook(function () {
     return {
       "dir": "ltr",

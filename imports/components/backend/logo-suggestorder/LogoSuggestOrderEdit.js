@@ -26,7 +26,7 @@ export default class LogoTypeEdit extends Component {
       active : formActive,
       prority : formPrority
     }
-    let { _id } = this.props.category;
+    let { _id } = this.props.data;
     Meteor.call('logoSuggestOrders.update', _id, data, (err, res) => {
       if (err) {
         this.setState({
@@ -34,6 +34,7 @@ export default class LogoTypeEdit extends Component {
         });
         return;
       }
+      alert('OK');
       this.setState({ errors: [] });
     });
 

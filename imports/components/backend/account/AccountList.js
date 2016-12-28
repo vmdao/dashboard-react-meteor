@@ -13,25 +13,25 @@ import {
 @withRouter
 class Account extends Component {
   edit = () => {
-    this.props.router.push(`/account/edit/${this.props.account._id}`);
+    this.props.router.push(`/backend/accounts/edit/${this.props.data._id}`);
   }
   render() {
-    let {account} = this.props;
-    if (!account) return;
+    let {data} = this.props;
+    if (!data) return;
     return (
       <tr onClick={this.edit}>
-        <td>{account.fullname}</td>
-        <td>{account.username}</td>
-        <td>{account.emails[0].address}</td>
-        <td>{account.active}</td>
+        <td>{data.username}</td>
+        <td>{data.username}</td>
+        <td>{data.emails[0].address}</td>
+        <td>{data.createAt}</td>
       </tr>
     );
   }
 }
 
-class AccountList extends Component {
+export default  class AccountList extends Component {
   static propTypes = {
-    accounts: React.PropTypes.array,
+    data: React.PropTypes.array,
   };
   componentDidMount() {
     // $(ReactDOM.findDOMNode(this.table)).dataTable({
@@ -42,8 +42,9 @@ class AccountList extends Component {
     // });
   }
   render() {
-    let {accounts} = this.props;
-    if (accounts.length === 0) return null;
+    let {data} = this.props;
+  
+    if (data.length < 1) return null;
     return (
       <Grid>
         <Row>
@@ -53,13 +54,13 @@ class AccountList extends Component {
                 <th>Fullname</th>
                 <th>Username</th>
                 <th>Email</th>
-                <th>Active</th>
+                <th>Create At</th>
               </tr>
             </thead>
             <tbody>
               {
-                accounts.map(account => {
-                  return <Account account={account} key={account._id} />
+                data.map(item => {
+                  return <Account data={item} key={item._id} />
                 })
               }
             </tbody>
@@ -70,5 +71,3 @@ class AccountList extends Component {
   }
 }
 
-
-export default AccountList;

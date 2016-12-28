@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
-
+import Dropzone from 'react-dropzone';
+import { ImageFiles } from '../../../api/ImageFiles';
+import $ from 'jquery';
 import {
   Row,
   Col,
@@ -18,20 +20,45 @@ export default class LogoStyleEdit extends Component {
   state = {
     errors: []
   };
+  upload = (files) => {
+    files.forEach(file => {
+      ImageFiles.insert(file, (err, fileObj) => {
+        if (err) {
+          console.log(err); //in case there is an error, log it to the console
+        } else {
+          this.addShape(file.preview);
+        }
+      });
+    });
+  }
+
+  addShape(url) {
+    this.formFeatureImg = url;
+    let $imageOld = $('.img-thumbnail');
+    let $imageNew = $('<img src="'+ url +'"  class="img-thumbnail" ref alt="Cinque Terre" width="200" height="60" />');
+    $imageOld.replaceWith($imageNew);
+  }
   update = (e) => {
     e.preventDefault();
-    let formCode = ReactDOM.findDOMNode(this.formCode).value;
     let formActive = ReactDOM.findDOMNode(this.formActive).value;
     let formKeyword = ReactDOM.findDOMNode(this.formKeyword).value;
     let formName = ReactDOM.findDOMNode(this.formName).value;
-    let { _id } = this.props.style;
-    Meteor.call('logoStyles.update', _id, formActive, formName, formKeyword, (err, res) => {
+    let formFeatureImg = this.formFeatureImg || this.props.data.featureImg;
+    let { _id } = this.props.data;
+     const data = { 
+      active: formActive,
+      keyword: formKeyword,
+      name: formName,
+      featureImg: formFeatureImg
+    }
+    Meteor.call('logoStyles.update', _id, data, (err, res) => {
       if (err) {
         this.setState({
           errors: [].concat(err),
         });
         return;
       }
+       alert('OK');
       this.setState({ errors: [] });
     });
 
@@ -45,8 +72,8 @@ export default class LogoStyleEdit extends Component {
           })}
         </Alert>
       ) : null;
-    let {style} = this.props;
-    if (!style) return;
+    let {data} = this.props;
+    if (!data) return;
     return (
       <div>
         {errors}
@@ -57,8 +84,32 @@ export default class LogoStyleEdit extends Component {
                 <Col componentClass={ControlLabel} sm={2}>
                   Code
                 </Col>
-                <Col sm={10}>
-                  <FormControl type="text" placeholder="0001" defaultValue={style.code} ref={(input) => this.formCode = input} />
+                <Col sm={5}>
+                  <FormControl type="text" placeholder="0001" defaultValue={data.code} ref={(input) => this.formCode = input} />
+                </Col>
+              </FormGroup>
+              <FormGroup controlId="formFeature">
+                <Col componentClass={ControlLabel} sm={2}>
+                Feature
+                </Col>
+                <Col sm={6}>
+                    <div className="box-add" style={{ float: 'left', width: '4.5%', minWidth: 40 }}>
+                        <Dropzone style={{
+                        width: 35,
+                        height: 35,
+                        borderWidth: 1,
+                        borderColor: '#666',
+                        borderStyle: 'dashed',
+                        borderRadius: 5,
+                        textAlign: 'center',
+                        fontSize: 23,
+                        marginBottom: 10,
+                        cursor: 'pointer'
+                        }} onDrop={this.upload}>
+                        <span className="icon-nargela-upload rubix-icon"></span>
+                        </Dropzone>
+                    </div>
+                    <img src={data.featureImg} className="img-thumbnail" ref alt="Feature style" width="200" height="60" />
                 </Col>
               </FormGroup>
               <FormGroup controlId="formControlsSelect" >
@@ -66,7 +117,7 @@ export default class LogoStyleEdit extends Component {
                   Active
                 </Col>
                 <Col sm={10}>
-                  <FormControl componentClass="select" placeholder="select" defaultValue={style.active} ref={(input) => this.formActive = input} >
+                  <FormControl componentClass="select" placeholder="select" defaultValue={data.active} ref={(input) => this.formActive = input} >
                     <option value="1">On</option>
                     <option value="0">Off</option>
                   </FormControl>
@@ -78,7 +129,7 @@ export default class LogoStyleEdit extends Component {
                   Name
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="text" placeholder="Education" defaultValue={style.name} ref={(input) => this.formName = input} />
+                  <FormControl type="text" placeholder="Education" defaultValue={data.name} ref={(input) => this.formName = input} />
                 </Col>
               </FormGroup>
               <FormGroup controlId="formKeyword">
@@ -86,7 +137,7 @@ export default class LogoStyleEdit extends Component {
                   Keyword
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="text" placeholder="Education, school, trainning" defaultValue={style.keyword} ref={(input) => this.formKeyword = input} />
+                  <FormControl type="text" placeholder="Education, school, trainning" defaultValue={data.keyword} ref={(input) => this.formKeyword = input} />
                 </Col>
               </FormGroup>
               <FormGroup controlId="formSubmit">

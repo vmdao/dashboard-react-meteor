@@ -25,7 +25,7 @@ export default class LogoTagEdit extends Component {
     let formActive = ReactDOM.findDOMNode(this.formActive).value;
     let formKeyword = ReactDOM.findDOMNode(this.formKeyword).value;
     let formName = ReactDOM.findDOMNode(this.formName).value;
-    let { _id } = this.props.category;
+    let { _id } = this.props.data;
     Meteor.call('logoTags.update', _id, formActive, formName, formKeyword, (err, res) => {
       if (err) {
         this.setState({
@@ -33,6 +33,7 @@ export default class LogoTagEdit extends Component {
         });
         return;
       }
+      alert('OK');
       this.setState({ errors: [] });
     });
 

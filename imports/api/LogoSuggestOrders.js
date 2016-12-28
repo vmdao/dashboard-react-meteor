@@ -47,9 +47,8 @@ Meteor.methods({
     return true;
   },
 
-  'logoSuggestOrders.updateCount'(_id, count) {
-    check(count, Number);
-    return LogoSuggestOrders.update({ _id }, { $set: {count: count} });
+  'logoSuggestOrders.updateCount'(data) {
+    return LogoSuggestOrders.update( data , { $inc: { count: 1}});
   },
 
   'logoSuggestOrders.update'(_id, data) {

@@ -17,11 +17,11 @@ import AccountList from '../../components/backend/account/AccountList';
 
 class AccountListPage extends Component {
   static propTypes = {
-    accounts: React.PropTypes.array.isRequired,
+    data: React.PropTypes.array.isRequired,
   };
 
   render() {
-    let {accounts} = this.props;
+    let {data} = this.props;
     return (
       <PanelContainer>
         <Panel>
@@ -30,7 +30,7 @@ class AccountListPage extends Component {
               <Row>
                 <Col xs={12}>
                   <h3>Accounts List:</h3>
-                  <AccountList accounts={accounts} />
+                  <AccountList data={data} />
                 </Col>
               </Row>
             </Grid>
@@ -42,10 +42,10 @@ class AccountListPage extends Component {
 }
 
 export default createContainer(() => {
-  Meteor.subscribe('accounts');
-  const accounts = Meteor.users.find({}).fetch() || [];
-  console.log(123, accounts)
+  Meteor.subscribe('users');
+  const accounts = Meteor.users.find().fetch() || [];
+  console.log('list page', accounts)
   return {
-    accounts: accounts,
+    data: accounts,
   };
 }, AccountListPage);

@@ -13,7 +13,7 @@ import {
 
 import AccountCreate from '../../components/backend/account/AccountCreate';
 
-class AccountCreatePage extends Component {
+export default  class AccountCreatePage extends Component {
     render() {
         return (
             <PanelContainer>
@@ -22,7 +22,7 @@ class AccountCreatePage extends Component {
                         <Grid>
                             <Row>
                                 <Col xs={12}>
-                                    <h3>Add New Category</h3>
+                                    <h3>Add New Account</h3>
                                     <AccountCreate />
                                 </Col>
                             </Row>
@@ -33,5 +33,3 @@ class AccountCreatePage extends Component {
         );
     }
 }
-
-export default AccountCreatePage;

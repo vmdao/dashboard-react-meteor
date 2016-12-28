@@ -3,6 +3,9 @@ import SiginupForm from '../../components/frontend/auth/SiginupForm';
 export default class AuthenticationPage extends Component {
 
   render() {
+    analytics.track( '[PAGE]Signup', {
+        title: 'Page Signup'
+    });
     const style = {
       top: 0,
       left: 0,

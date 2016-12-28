@@ -1,7 +1,8 @@
 {
   "public": {
     "analyticsSettings": {
-      "Mixpanel": {"token":  "b72f1dacd081933eccfb16743640b01e", "people": true}
+      "Mixpanel": {"token":  "b72f1dacd081933eccfb16743640b01e", "people": true},
+      "Google Analytics" : {"trackingId": "UA-89543908-1"}
     }
   }
 }

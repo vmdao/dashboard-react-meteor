@@ -27,14 +27,17 @@ export default class LoginForm extends React.Component {
         e.preventDefault();
         let email = ReactDOM.findDOMNode(this.formEmail).value;
         let password = ReactDOM.findDOMNode(this.formPassword).value;
+        analytics.track( '[BTN]Login', {
+            title: 'Click Button Login'
+        });
         Meteor.loginWithPassword(email, password, (err) => {
             if (err) {
-                alert('Sign up Fails');
+                alert('Sign in Fails');
                 this.setState({
                     error: err.reason
                 });
             } else {
-                alert('Sign up OK');
+                alert('Sign in OK');
                 window.location.href = window.location.origin;
             }
         });
@@ -50,7 +53,7 @@ export default class LoginForm extends React.Component {
 
     getPath = (path) => {
         var dir = this.props.location.pathname.search('rtl') !== -1 ? '' : '';
-        path = `/${dir}/${path}`;
+        path = window.location.origin + `${dir}/${path}`;
         return path;
     }
 
@@ -79,7 +82,7 @@ export default class LoginForm extends React.Component {
                                     </div>
                                     <div>
                                         <div className='text-center' style={{ padding: 12.5 }}>
-                                            or use your BrandCaff account
+                                            or use your account
                           </div>
                                         <div style={{ padding: 25, paddingTop: 0, paddingBottom: 0, margin: 'auto', marginBottom: 25, marginTop: 25 }}>
                                             <Form onSubmit={this.back}>
@@ -88,7 +91,7 @@ export default class LoginForm extends React.Component {
                                                         <InputGroup.Addon>
                                                             <Icon glyph='icon-fontello-mail' />
                                                         </InputGroup.Addon>
-                                                        <FormControl autoFocus type='email' className='border-focus-blue' placeholder='hey@brandcaff.com' />
+                                                        <FormControl autoFocus type='email' ref={(input) => this.formEmail = input}  className='border-focus-blue' placeholder='hey@brandcaff.com' />
                                                     </InputGroup>
                                                 </FormGroup>
                                                 <FormGroup controlId='password'>
@@ -96,14 +99,14 @@ export default class LoginForm extends React.Component {
                                                         <InputGroup.Addon>
                                                             <Icon glyph='icon-fontello-key' />
                                                         </InputGroup.Addon>
-                                                        <FormControl type='password' className='border-focus-blue' placeholder='password' />
+                                                        <FormControl type='password' ref={(input) => this.formPassword = input}  className='border-focus-blue' placeholder='password' />
                                                     </InputGroup>
                                                 </FormGroup>
                                                 <FormGroup>
                                                     <Grid>
                                                         <Row>
                                                             <Col xs={6} collapseLeft collapseRight style={{ paddingTop: 10 }}>
-                                                                <Link to={this.getPath('signup')}>Create a BrandCaff account</Link>
+                                                                <Link to={this.getPath('signup')}>Create a account</Link>
                                                             </Col>
                                                             <Col xs={6} collapseLeft collapseRight className='text-right'>
                                                                 <Button outlined lg type='submit' bsStyle='blue' onClick={this.back}>Login</Button>
