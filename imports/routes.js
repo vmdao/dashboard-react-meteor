@@ -45,6 +45,7 @@ import AccountCreatePage from './routes/account/AccountCreatePage';
 import AccountEditPage from './routes/account/AccountEditPage';
 import AccountOnlineListPage from './routes/account/AccountOnlineListPage';
 import AnalyticListPage from './routes/analytic/AnalyticListPage';
+import PaymentListPage from './routes/payment-page/PaymentListPage';
 import AppMain from './components/frontend/models/App';
 
 
@@ -120,6 +121,7 @@ export default (
       <Route path='/backend/accounts/online' component={AccountOnlineListPage} />
 
       <Route path='/backend/analytics' component={AnalyticListPage} />
+      <Route path='/backend/payments' component={PaymentListPage} />
 
     </Route>
   </Router>

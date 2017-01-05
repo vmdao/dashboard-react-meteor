@@ -34,9 +34,9 @@ class ApplicationSidebar extends React.Component {
                   <SidebarNavItem glyph='icon-feather-play' name='Go Site' href='/' />
                   <SidebarNavItem glyph='icon-fontello-gauge' name='Dashboard'>
                     <SidebarNav>
-                          <SidebarNavItem glyph='icon-feather-shuffle' name='Suggest Logo' href='/backend/logo-suggestorders' />
-                          <SidebarNavItem glyph='icon-feather-bell' name='Account Online' href='/backend/accounts/online' />
-                          <SidebarNavItem glyph='icon-feather-monitor' name='Analytic seft' href='/backend/analytics' />
+                      <SidebarNavItem glyph='icon-feather-shuffle' name='Suggest Logo' href='/backend/logo-suggestorders' />
+                      <SidebarNavItem glyph='icon-feather-bell' name='Account Online' href='/backend/accounts/online' />
+                      <SidebarNavItem glyph='icon-feather-monitor' name='Analytic seft' href='/backend/analytics' />
                     </SidebarNav>
                   </SidebarNavItem>
                   <SidebarNavItem glyph='icon-feather-briefcase' name='App'>
@@ -53,7 +53,7 @@ class ApplicationSidebar extends React.Component {
                           <SidebarNavItem glyph='icon-feather-book' name='Add New Type' href='/backend/logo-types/create' />
                         </SidebarNav>
                       </SidebarNavItem>
-                      
+
                       <SidebarNavItem glyph='icon-feather-layers' name='Style'>
                         <SidebarNav>
                           <SidebarNavItem glyph='icon-feather-layers' name='All Style' href='/backend/logo-styles' />
@@ -67,8 +67,8 @@ class ApplicationSidebar extends React.Component {
                           <SidebarNavItem glyph='icon-feather-tag' name='Add New Tag' href='/backend/logo-tags/create' />
                         </SidebarNav>
                       </SidebarNavItem>
-                      <SidebarNavItem glyph='icon-outlined-todolist' name='Suggest Logo'  href='/backend/logo-suggestorders' />
-              
+                      <SidebarNavItem glyph='icon-outlined-todolist' name='Suggest Logo' href='/backend/logo-suggestorders' />
+
                       <SidebarNavItem glyph='icon-outlined-todolist' name='Logo'>
                         <SidebarNav>
                           <SidebarNavItem glyph='icon-outlined-todolist' name='All Logo' href='/backend/logos' />
@@ -80,10 +80,11 @@ class ApplicationSidebar extends React.Component {
                   </SidebarNavItem>
                   <SidebarNavItem glyph='icon-stroke-gap-icons-Users' name='Account'>
                     <SidebarNav>
-                        <SidebarNavItem glyph='icon-stroke-gap-icons-Users' name='All Account' href='/backend/accounts' />
-                        <SidebarNavItem glyph='icon-stroke-gap-icons-Users' name='Add New Account' href='/backend/accounts/create' />
+                      <SidebarNavItem glyph='icon-stroke-gap-icons-Users' name='All Account' href='/backend/accounts' />
+                      <SidebarNavItem glyph='icon-stroke-gap-icons-Users' name='Add New Account' href='/backend/accounts/create' />
                     </SidebarNav>
                   </SidebarNavItem>
+                  <SidebarNavItem glyph='icon-stroke-gap-icons-ClipboardChart' name='Payment' href='/backend/payments'></SidebarNavItem>
                   <SidebarNavItem glyph='icon-stroke-gap-icons-ClipboardChart' name='Analytic'>
                     <SidebarNav>
                       <SidebarNavItem glyph='icon-stroke-gap-icons-ClipboardChart' name='Account Online' href='/backend/accounts/online' />

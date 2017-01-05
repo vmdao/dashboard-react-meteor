@@ -11,7 +11,7 @@ import {
 } from '@sketchpixy/rubix';
 
 @withRouter
-class LogoStyle extends Component {
+class Payment extends Component {
   edit = () => {
     this.props.router.push(`/backend/logo-styles/edit/${this.props.data._id}`);
   }
@@ -19,18 +19,17 @@ class LogoStyle extends Component {
     let {data} = this.props;
     if (!data) return;
     return (
-      <tr onClick={this.edit} style={data.active == 0 ?{backgroundColor: '#f5f5f5'}: {}}>
-        <td><img src={data.featureImg} className="img-thumbnail" width="150" height="60" /></td>
-        <td>{data.name}</td>
+      <tr onClick={this.edit} style={data.active == 0 ? { backgroundColor: '#f5f5f5' } : {}}>
         <td>{data.code}</td>
-        <td>{data.keyword}</td>
+        <td>{data.name}</td>
+        <td>{data.amount}</td>
         <td>{data.active}</td>
       </tr>
     );
   }
 }
 
-export default  class LogoStyleList extends Component {
+export default class PaymentList extends Component {
   static propTypes = {
     data: React.PropTypes.array,
   };
@@ -51,17 +50,16 @@ export default  class LogoStyleList extends Component {
           <Table ref={(c) => this.table = c} className='display' cellSpacing='0' width='100%'>
             <thead>
               <tr>
-                <th>Feature</th>
-                <th>Name</th>
                 <th>Code</th>
-                <th>Keyword</th>
+                <th>name</th>
+                <th>Amount</th>
                 <th>Active</th>
               </tr>
             </thead>
             <tbody>
               {
                 data.map(item => {
-                  return <LogoStyle data={item} key={item._id} />
+                  return <Payment data={item} key={item._id} />
                 })
               }
             </tbody>
