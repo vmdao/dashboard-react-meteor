@@ -70,7 +70,7 @@ export default class LogoCreate extends Component {
         {errors}
         <Form horizontal onSubmit={this.create}>
           <FormGroup>
-            <Col sm={10}>
+            <Col sm={11}>
               <FormGroup controlId="formCode">
                 <Col componentClass={ControlLabel} sm={2}>
                   Code
@@ -155,9 +155,7 @@ export default class LogoCreate extends Component {
                   <FormControl type="text" placeholder="Education, school, trainning" ref={(input) => this.formKeyword = input} />
                 </Col>
               </FormGroup>
-              <FormGroup>
-                <LogoWorkspace />
-              </FormGroup>
+              <LogoWorkspace />
               <FormGroup controlId="formSubmit">
                 <Col smOffset={2} sm={10}>
                   <Button type="submit">
