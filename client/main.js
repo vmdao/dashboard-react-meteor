@@ -8,7 +8,9 @@ import routes from '../imports/routes';
 import './sass/main.scss';
 
 Meteor.startup(() => {
+  console.log('client'+ Meteor.isClient);
   ReactRouterSSR.Run(routes, {
     rootElement: 'app-container'
   });
 });
+ 

@@ -45,8 +45,10 @@ import AccountCreatePage from './routes/account/AccountCreatePage';
 import AccountEditPage from './routes/account/AccountEditPage';
 import AccountOnlineListPage from './routes/account/AccountOnlineListPage';
 import AnalyticListPage from './routes/analytic/AnalyticListPage';
+import AppMain from './components/frontend/models/App';
 
-class App extends Component {
+
+class AppBackend extends Component {
   render() {
     return (
       <MainContainer {...this.props}>
@@ -70,17 +72,9 @@ class App extends Component {
 class AppFrontend extends Component {
   render() {
     return (
-      <MainContainer {...this.props}>
-        <div id='body'>
-          <Grid>
-            <Row>
-              <Col xs={12}> Hello, You are User's BrandCaff
-                {this.props.children}
-              </Col>
-            </Row>
-          </Grid>
-        </div>
-      </MainContainer>
+      <div>
+        {this.props.children}
+      </div>
     );
   }
 }
@@ -88,11 +82,13 @@ class AppFrontend extends Component {
 
 export default (
   <Router>
-    <Route path='/' component={AppFrontend}></Route>
+    <Route path='/' component={AppFrontend}>
+      <IndexRoute component={AppMain} />
+    </Route>
     <Route path='/login' component={LoginPage} />
     <Route path='/signup' component={SiginupPage} />
     <Route path='/backend/login' component={LoginBackendPage} />
-    <Route path='/backend' component={App}>
+    <Route path='/backend' component={AppBackend}>
       <IndexRoute component={Home} />
       <Route path='/backend/logo-categories' component={LogoCategoryListPage} />
       <Route path='/backend/logo-categories/create' component={LogoCategoryCreatePage} />

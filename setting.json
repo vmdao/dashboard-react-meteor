@@ -1,8 +1,23 @@
 {
   "public": {
     "analyticsSettings": {
-      "Mixpanel": {"token":  "b72f1dacd081933eccfb16743640b01e", "people": true},
-      "Google Analytics" : {"trackingId": "UA-89543908-1"}
+      "Mixpanel": {
+        "token": "b72f1dacd081933eccfb16743640b01e",
+        "people": true
+      },
+      "Google Analytics": {
+        "trackingId": "UA-89543908-1"
+      }
+    },
+    "stripe": {
+      "testPublishableKey": "pk_test_AVR8LCEo3M7jSoKrdpj0UbgY",
+      "livePublishableKey": "pk_live_sleI3ttXZ2M5UfvfpihGJU7S"
+    }
+  },
+  "private": {
+    "stripe": {
+      "testPublishableKey": "sk_test_JyX7K6iyFRETPTf78q0HQo0N",
+      "livePublishableKey": "sk_live_SNNZOXkoJ4CmORrKvXyoSfZr"
     }
   }
 }

@@ -1,0 +1,1 @@
+export const siteUrl = 'http://labs-dev01.ddns.net';
