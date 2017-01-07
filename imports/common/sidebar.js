@@ -84,7 +84,7 @@ class ApplicationSidebar extends React.Component {
                       <SidebarNavItem glyph='icon-stroke-gap-icons-Users' name='Add New Account' href='/backend/accounts/create' />
                     </SidebarNav>
                   </SidebarNavItem>
-                  <SidebarNavItem glyph='icon-stroke-gap-icons-ClipboardChart' name='Payment' href='/backend/payments'></SidebarNavItem>
+                  <SidebarNavItem glyph='icon-fontello-money' name='Payment' href='/backend/payments'></SidebarNavItem>
                   <SidebarNavItem glyph='icon-stroke-gap-icons-ClipboardChart' name='Analytic'>
                     <SidebarNav>
                       <SidebarNavItem glyph='icon-stroke-gap-icons-ClipboardChart' name='Account Online' href='/backend/accounts/online' />

@@ -1252,27 +1252,7 @@ ul {
         width: calc(100% + 40px)
     }
 }
-@font-face {
-    font-family: FuturaPT-Medium;
-    src: url(../fonts/31ABFD_0_0.eot);
-    src: url(../fonts/31ABFD_0_0.eot?#iefix) format('embedded-opentype'), url(../fonts/31ABFD_0_0.woff2) format('woff2'), url(../fonts/31ABFD_0_0.woff) format('woff'), url(../fonts/31ABFD_0_0.ttf) format('truetype')
-}
-@font-face {
-    font-family: Basetica-Black;
-    src: url(../fonts/31ABFD_1_0.eot);
-    src: url(../fonts/31ABFD_1_0.eot?#iefix) format('embedded-opentype'), url(../fonts/31ABFD_1_0.woff2) format('woff2'), url(../fonts/31ABFD_1_0.woff) format('woff'), url(../fonts/31ABFD_1_0.ttf) format('truetype')
-}
-@font-face {
-    font-family: GreycliffCF-Bold;
-    src: url(../fonts/GreycliffCF-Bold.eot);
-    src: url(../fonts/GreycliffCF-Bold.eot?#iefix) format('embedded-opentype'), url(../fonts/GreycliffCF-Bold.woff2) format('woff2'), url(../fonts/GreycliffCF-Bold.woff) format('woff'), url(../fonts/GreycliffCF-Bold.ttf) format('truetype')
-}
-.futura {
-    font-family: FuturaPT-Medium
-}
-.basetica {
-    font-family: Basetica-Black
-}
+
 .montserrat {
     font-family: Montserrat
 }

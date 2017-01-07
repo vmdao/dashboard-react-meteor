@@ -39,14 +39,14 @@ class LogoRow2 extends Component {
 
 
         this.boxBackgroudStyle = {
-            // backgroundColor: 'red',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
             minHeight: '270px',
         }
         this._tempStyle = {
-            cursor: 'point'
+            cursor: 'pointer'
         }
-
-
     }
 
     componentDidMount() {
@@ -56,10 +56,14 @@ class LogoRow2 extends Component {
                 families: ['Righteous', 'Passion One', 'Roboto:300,400,700', 'Maitree', 'Droid Serif', 'Roboto Slab', 'Merriweather', 'Bungee Inline']
             }
         });
-        $('.logoBackground').each(function () {
-            var t = shuffleColor();
-            $(this).css('background', t);
-        });
+        // $('.logoBackground').each(function () {
+        //     var t = shuffleColor();
+        //     $(this).css('background', t);
+        // });
+        $(this.logoBackground).css({ backgroundColor: this.props.data.workspaceColor });
+        $(this.logoBackground).html(this.props.data.logoScopeData);
+        $(this.logoBackground).find('#workspace').css({ maxWidth: 300, maxHeight: 150 })
+
     }
     show(type) {
         document.addEventListener('click', this.hide);
@@ -210,16 +214,17 @@ class LogoRow2 extends Component {
     }
 
     render() {
+        let {data} = this.props;
         return (
             <li ref='item' className={'grid-row-list' + (this.state.listVisible ? ' active-hover-item ' : ' ')} onMouseOver={this.handleOnMouseEnter} onMouseLeave={this.handleOnMouseLeave} onClick={this.handleClickPreview}>
                 <div className={"meta-data" + (this.state.listVisible ? ' ' : ' ')}>
                     <div className={'details' + (this.state.listVisible ? ' preview-show' : '')}>
 
                         <div className="font-meta-name">
-                            <span className="code-logo">Code: <span className="code-logo-child">{this.props.data.code}</span></span><br />
-                            <span className="author">By: BrandCaff.com</span><br />
-                            <span className="old-price">Price: was <span className="old-price-child">$79</span></span><br />
-                            <span className="new-price" onClick={this.handleClickBuy}><span className="new-price-child">${this.props.data.price}&nbsp;&nbsp; | &nbsp;&nbsp; Buy now</span></span><br />
+                            <span className="code-logo">Code: <span className="code-logo-child">{data.code}</span></span><br />
+                            <span className="author">{data.author}</span><br />
+                            <span className="old-price">Price: was <span className="old-price-child">${data.priceOld}</span></span><br />
+                            <span className="new-price" onClick={this.handleClickBuy}><span className="new-price-child">${data.price}&nbsp;&nbsp; | &nbsp;&nbsp; Buy now</span></span><br />
 
                         </div>
                         <div className="preview2">
@@ -243,8 +248,8 @@ class LogoRow2 extends Component {
                 </div>
                 <span href="" target="_blank" className="font">
                     <div className="font-text cp-white" id="greycliff-textcolor">
-                        <div className="logoBackground" style={this.boxBackgroudStyle}>
-                            {this.renderFormLogoType()}
+                        <div ref={logoBackground => { this.logoBackground = logoBackground } } className="logoBackground" style={this.boxBackgroudStyle}>
+
                         </div>
                     </div>
                 </span>

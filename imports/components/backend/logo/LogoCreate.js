@@ -24,15 +24,26 @@ export default class LogoCreate extends Component {
   };
   create = (e) => {
     e.preventDefault();
+    let $workspace = $('#workspace');
+    let $workspaceClone = $workspace.clone();
+    let workspaceScopeHtml = this.getScopeLogo($workspaceClone);
+    let workspaceColor = $workspace.attr('data-color') || '#000000';
+
     const data = {
       code: ReactDOM.findDOMNode(this.formCode).value,
       active: ReactDOM.findDOMNode(this.formActive).value,
       keyword: ReactDOM.findDOMNode(this.formKeyword).value,
       name: ReactDOM.findDOMNode(this.formName).value,
-      category:  ReactDOM.findDOMNode(this.formCategories).value,
-      style:  ReactDOM.findDOMNode(this.formStyles).value,
-      type:  ReactDOM.findDOMNode(this.formTypes).value,
+      category: ReactDOM.findDOMNode(this.formCategories).value,
+      style: ReactDOM.findDOMNode(this.formStyles).value,
+      type: ReactDOM.findDOMNode(this.formTypes).value,
       tag: ReactDOM.findDOMNode(this.formTags).value,
+      logoData: $workspace[0].outerHTML,
+      logoScopeData: workspaceScopeHtml,
+      workspaceColor: workspaceColor,
+      price: ReactDOM.findDOMNode(this.formPrice).value,
+      priceOld: ReactDOM.findDOMNode(this.formPriceOld).value,
+      author: ReactDOM.findDOMNode(this.formAuthor).value,
     }
     Meteor.call('logos.create', data, (err, res) => {
       if (err) {
@@ -46,13 +57,49 @@ export default class LogoCreate extends Component {
         'style._id': data.style,
         'type._id': data.type,
       }
-      Meteor.call('logoSuggestOrders.updateCount', logoSuggestOrdersData, (err, res) =>{
+      Meteor.call('logoSuggestOrders.updateCount', logoSuggestOrdersData, (err, res) => {
 
       })
       alert('OK');
       this.setState({ errors: [] });
     });
 
+  }
+  getScopeLogo($workspace) {
+    console.log($workspace);
+    $workspace.appendTo('#footer');
+    let element = $workspace.find('div.element');
+    let positionArray = [];
+
+    element.each((index, item) => {
+      let $item = $(item);
+      let positionElement = { xMin: $item.position().left, yMin: $item.position().top, xMax: ($item.position().left + $item.width()), yMax: ($item.position().top + $item.height()) }
+      positionArray.push(positionElement);
+    });
+    if (positionArray.length === 0) return
+    let xMin = _.minBy(positionArray, o => {
+      return o.xMin;
+    })
+    let yMin = _.minBy(positionArray, o => {
+      return o.yMin;
+    })
+    let xMax = _.maxBy(positionArray, o => {
+      return o.xMax;
+    })
+    let yMax = _.maxBy(positionArray, o => {
+      return o.yMax;
+    })
+
+    element.each((index, item) => {
+      let $item = $(item);
+      let size = { left: $item.position().left - xMin.xMin, top: $item.position().top - yMin.yMin }
+      $item.css(size);
+    });
+
+    $workspace.css({ width: xMax.xMax - xMin.xMin, height: yMax.yMax - yMin.yMin });
+    var html = $workspace[0].outerHTML;
+    $workspace.remove();
+    return html;
   }
 
   render() {
@@ -96,8 +143,8 @@ export default class LogoCreate extends Component {
                 </Col>
                 <Col sm={10}>
                   <FormControl componentClass="select" placeholder="select" ref={(input) => this.formCategories = input} >
-                    {this.props.data.categories.map(category=>{
-                        return (<option value={category._id}>{category.name}</option>)
+                    {this.props.data.categories.map(category => {
+                      return (<option value={category._id}>{category.name}</option>)
                     })}
                   </FormControl>
                 </Col>
@@ -108,8 +155,8 @@ export default class LogoCreate extends Component {
                 </Col>
                 <Col sm={10}>
                   <FormControl componentClass="select" placeholder="select" ref={(input) => this.formStyles = input} >
-                    {this.props.data.styles.map(style=>{
-                        return (<option value={style._id}>{style.name}</option>)
+                    {this.props.data.styles.map(style => {
+                      return (<option value={style._id}>{style.name}</option>)
                     })}
                   </FormControl>
                 </Col>
@@ -120,8 +167,8 @@ export default class LogoCreate extends Component {
                 </Col>
                 <Col sm={10}>
                   <FormControl componentClass="select" placeholder="select" ref={(input) => this.formTypes = input} >
-                    {this.props.data.types.map(type=>{
-                        return (<option value={type._id}>{type.name}</option>)
+                    {this.props.data.types.map(type => {
+                      return (<option value={type._id}>{type.name}</option>)
                     })}
                   </FormControl>
                 </Col>
@@ -132,19 +179,22 @@ export default class LogoCreate extends Component {
                 </Col>
                 <Col sm={10}>
                   <FormControl componentClass="select" placeholder="select" ref={(input) => this.formTags = input} multiple>
-                    {this.props.data.tags.map(tag=>{
-                        return (<option value={tag._id}>{tag.name}</option>)
+                    {this.props.data.tags.map(tag => {
+                      return (<option value={tag._id}>{tag.name}</option>)
                     })}
                   </FormControl>
                 </Col>
               </FormGroup>
-              
+
               <FormGroup controlId="formName">
                 <Col componentClass={ControlLabel} sm={2}>
                   Name
                 </Col>
-                <Col sm={10}>
-                  <FormControl type="text" placeholder="Education" ref={(input) => this.formName = input} />
+                <Col sm={5}>
+                  <FormControl type="text" placeholder="Education Small" ref={(input) => this.formName = input} />
+                </Col>
+                <Col sm={5}>
+                  <FormControl type="text" placeholder="Nam Davis" ref={(input) => this.formAuthor = input} />
                 </Col>
               </FormGroup>
               <FormGroup controlId="formKeyword">
@@ -152,7 +202,18 @@ export default class LogoCreate extends Component {
                   Keyword
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="text" placeholder="Education, school, trainning" ref={(input) => this.formKeyword = input} />
+                  <FormControl type="text" placeholder="Love, Cute" ref={(input) => this.formKeyword = input} />
+                </Col>
+              </FormGroup>
+              <FormGroup controlId="formKeyword">
+                <Col componentClass={ControlLabel} sm={2}>
+                  Price
+                </Col>
+                <Col sm={5}>
+                  <FormControl type="text" placeholder="100" ref={(input) => this.formPrice = input} />
+                </Col>
+                <Col sm={5}>
+                  <FormControl type="text" placeholder="120" ref={(input) => this.formPriceOld = input} />
                 </Col>
               </FormGroup>
               <LogoWorkspace />

@@ -71,7 +71,7 @@ export default class GroupStyle extends React.Component {
             left: '0px',
         }
         return (
-            <Button.Group size={'huge'}>
+            <Button.Group size={'medium'}>
 
                 <Button icon='adjust' compact data-font="color1" onClick={this.handleClickWorkspaceColor1} />
                 {this.state.displayColorPicker1 ?

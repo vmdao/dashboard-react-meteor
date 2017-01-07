@@ -7,7 +7,7 @@ import { siteUrl } from './Config';
 class Logo extends Component {
     constructor(props) {
         super(props);
-        this.state = { isCollapse: false, logos: props.data.logos };
+        this.state = { isCollapse: false, logos: props.data };
         this.handleClick = this.handleClick.bind(this);
         this.handleClickGetMore = this.handleClickGetMore.bind(this);
         this.ajaxCheckoutStripe = this.ajaxCheckoutStripe.bind(this);
@@ -18,7 +18,6 @@ class Logo extends Component {
     componentDidMount() {
         // $(this.refs.workspaceLogo).detach();
         let stripeKey = Meteor.settings.public.stripe.testPublishableKey;
-        console.log('key', stripeKey)
         this.paymentStripe = StripeCheckout.configure({
             key: stripeKey,
             image: '/favicon/favicon.ico',
@@ -31,7 +30,6 @@ class Logo extends Component {
                 });
             }
         });
-        console.log('on' + this.paymentStripe)
         $(window).on('popstate', function () {
             this.paymentStripe.close();
         });
@@ -63,7 +61,7 @@ class Logo extends Component {
     }
 
     ajaxCheckoutStripe() {
-        console.log(this)
+
         this.paymentStripe.open({
             name: 'titleStripe',
             description: 'To watermark 400 images',
@@ -255,7 +253,8 @@ class Logo extends Component {
                     hex: "#07BA16"
                 }]
         };
-        console.log('off' + this.paymentStripe)
+        let {data} = this.props
+        console.log('logo', data);
         return (
             <div ref="item" id="SansSerifLogos" className="SansSerifLogos">
                 <section className={'section ' + (this.state.isCollapse ? ' section__collapsed' : '')}>
@@ -274,7 +273,7 @@ class Logo extends Component {
                 <section ref="workspaceLogo" className="wrap-logo-hidden">
                     <div className="section section-wrap-all-logo">
                         <ul className="grid-row">
-                            {this.state.logos.map((value, index) => {
+                            {data.map((value, index) => {
                                 return <LogoRow2
                                     paymentStripe={this.ajaxCheckoutStripe}
                                     key={index}

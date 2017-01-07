@@ -46,10 +46,31 @@ import AccountEditPage from './routes/account/AccountEditPage';
 import AccountOnlineListPage from './routes/account/AccountOnlineListPage';
 import AnalyticListPage from './routes/analytic/AnalyticListPage';
 import PaymentListPage from './routes/payment-page/PaymentListPage';
-import AppMain from './components/frontend/models/App';
+import AppPage from './routes/app/AppPage';
 
 
 class AppBackend extends Component {
+  loadjscssfile(filename, filetype) {
+    if (filetype == "js") { //if filename is a external JavaScript file
+      var fileref = document.createElement('script')
+      fileref.setAttribute("type", "text/javascript")
+      fileref.setAttribute("src", filename)
+    }
+    else if (filetype == "css") { //if filename is an external CSS file
+      var fileref = document.createElement("link");
+      fileref.setAttribute("rel", "stylesheet")
+      fileref.setAttribute("type", "text/css")
+      fileref.setAttribute("href", filename);
+    }
+    document.head.appendChild(fileref);
+
+  }
+  componentDidMount() {
+
+    this.loadjscssfile('//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css', 'css');
+    
+  }
+
   render() {
     return (
       <MainContainer {...this.props}>
@@ -71,6 +92,28 @@ class AppBackend extends Component {
 }
 
 class AppFrontend extends Component {
+  loadjscssfile(filename, filetype) {
+    if (filetype == "js") { //if filename is a external JavaScript file
+      var fileref = document.createElement('script')
+      fileref.setAttribute("type", "text/javascript")
+      fileref.setAttribute("src", filename)
+    }
+    else if (filetype == "css") { //if filename is an external CSS file
+      var fileref = document.createElement("link");
+      fileref.setAttribute("rel", "stylesheet")
+      fileref.setAttribute("type", "text/css")
+      fileref.setAttribute("href", filename);
+    }
+    document.head.appendChild(fileref);
+
+  }
+  componentDidMount() {
+    this.loadjscssfile('/css/index.css', 'css');
+    this.loadjscssfile('/css/plus.css', 'css');
+    this.loadjscssfile('/css/mobile.css', 'css');
+    this.loadjscssfile('https://checkout.stripe.com/checkout.js', 'js');
+  }
+
   render() {
     return (
       <div>
@@ -84,7 +127,7 @@ class AppFrontend extends Component {
 export default (
   <Router>
     <Route path='/' component={AppFrontend}>
-      <IndexRoute component={AppMain} />
+      <IndexRoute component={AppPage} />
     </Route>
     <Route path='/login' component={LoginPage} />
     <Route path='/signup' component={SiginupPage} />

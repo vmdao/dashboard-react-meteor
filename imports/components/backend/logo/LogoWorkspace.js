@@ -28,12 +28,21 @@ export default class LogoWorkspace extends Component {
     }
 
     componentDidMount() {
+
+        if (this.props.logoData) {
+            let workspaceOld = $('#workspace');
+            let workspaceNew = $(this.props.logoData);
+            workspaceOld.replaceWith(workspaceNew);
+        }
+        this.workspace = $('#workspace')[0];
+
         const fontLoader = require('webfontloader');
         fontLoader.load({
             google: {
                 families: ['Roboto', 'Roboto Slab', 'Lato', 'Oswald']
             }
         });
+
         interact('.draggable')
             .draggable({
                 onmove: this.dragMoveListener,
@@ -219,7 +228,7 @@ export default class LogoWorkspace extends Component {
         textAdd.data('element', textData);
         textAdd.appendTo(this.workspace);
         let size = this.setSizeBox(textAdd);
-        textAdd.css(size);
+        textAdd.css({ width: 92, height: 69, lineHeight: 1.4 });
         this.setState({
             type: 'text',
             element: textAdd
@@ -256,8 +265,7 @@ export default class LogoWorkspace extends Component {
     };
 
     handleChangeComplete = color => {
-        $(this.workspace).css({ backgroundColor: color.hex });
-        this.getScopeLogo()
+        $(this.workspace).css({ backgroundColor: color.hex }).attr('data-color', color.hex);
     }
     getMenuText() {
         let menuText = $('<div class="box-menu-text"></div>');
@@ -303,7 +311,7 @@ export default class LogoWorkspace extends Component {
             left: '0px',
         }
         return (
-            <FormGroup md={12} style={{ marginTop: 60 }}>
+            <FormGroup style={{ marginTop: 60 }}>
                 <Col sm={2} style={{ paddingRight: 0 }}>
                     <div className="box-add" style={{ float: 'right', width: '4.5%', minWidth: 35 }}>
                         <Dropzone style={{
@@ -318,7 +326,7 @@ export default class LogoWorkspace extends Component {
                             marginBottom: 10,
                             cursor: 'pointer'
                         }} onDrop={this.upload}>
-                            <span className="icon-nargela-upload rubix-icon"></span>
+                            <span className="icon-nargela-upload rubix-icon" style={{ lineHeight: 1.7 }}></span>
                         </Dropzone>
                         <div onClick={this.handleClickTextAdd} style={{
                             width: 35,
@@ -332,7 +340,7 @@ export default class LogoWorkspace extends Component {
                             cursor: 'pointer',
                             marginBottom: 10,
                         }}>
-                            <span className="icon-fontello-font rubix-icon"></span>
+                            <span className="icon-fontello-font rubix-icon" style={{ lineHeight: 1.55 }}></span>
                         </div>
                         <div onClick={this.handleClickWorkspaceColor} style={{
                             width: 35,
@@ -345,7 +353,7 @@ export default class LogoWorkspace extends Component {
                             fontSize: 21,
                             cursor: 'pointer'
                         }}>
-                            <span className="icon-fontello-color-adjust rubix-icon"></span>
+                            <span className="icon-fontello-color-adjust rubix-icon" style={{ lineHeight: 1.55 }}></span>
                         </div>
                         {this.state.displayColorPicker ?
                             <div style={popover}>
@@ -363,7 +371,7 @@ export default class LogoWorkspace extends Component {
                             {this.state.element ?
                                 <Toolbar element={this.state.element} type={this.state.type} />
                                 : null}
-                            <div ref={(workspace) => { this.workspace = workspace } } style={{ overflow: 'hidden', backgroundColor: '#f5f5f5', width: '100%', height: 367, position: 'relative' }}>
+                            <div id='workspace' style={{ overflow: 'hidden', backgroundColor: '#f5f5f5', width: '100%', height: 367, position: 'relative' }}>
                             </div>
                         </div>
 

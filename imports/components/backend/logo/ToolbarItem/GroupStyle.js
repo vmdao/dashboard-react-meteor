@@ -55,7 +55,7 @@ export default class GroupStyle extends React.Component {
             { value: 'Oswald', text: 'Oswald' },
         ]
         return (
-            <Button.Group size={'huge'}>
+            <Button.Group size={'medium'}>
                 <Button icon='bold' compact data-font="bold" onClick={this.handleAction} />
                 <Button icon='italic' compact data-font="italic" onClick={this.handleAction} />
                 <Button icon='text height' compact data-font="uppercase" onClick={this.handleAction} />

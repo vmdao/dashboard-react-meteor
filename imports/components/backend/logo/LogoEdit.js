@@ -25,9 +25,9 @@ export default class LogoEdit extends Component {
       active: ReactDOM.findDOMNode(this.formActive).value,
       keyword: ReactDOM.findDOMNode(this.formKeyword).value,
       name: ReactDOM.findDOMNode(this.formName).value,
-      category:  ReactDOM.findDOMNode(this.formCategories).value,
-      style:  ReactDOM.findDOMNode(this.formStyles).value,
-      type:  ReactDOM.findDOMNode(this.formTypes).value,
+      category: ReactDOM.findDOMNode(this.formCategories).value,
+      style: ReactDOM.findDOMNode(this.formStyles).value,
+      type: ReactDOM.findDOMNode(this.formTypes).value,
       tag: ReactDOM.findDOMNode(this.formTags).value,
     }
     let { _id } = this.props.data.logo;
@@ -61,13 +61,13 @@ export default class LogoEdit extends Component {
         {errors}
         <Form horizontal onSubmit={this.update}>
           <FormGroup>
-            <Col sm={10}>
+            <Col sm={11}>
               <FormGroup controlId="formCode">
                 <Col componentClass={ControlLabel} sm={2}>
                   Code
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="text" placeholder="0001"  defaultValue={data.logo.code} ref={(input) => this.formCode = input} />
+                  <FormControl type="text" placeholder="0001" defaultValue={data.logo.code} ref={(input) => this.formCode = input} />
                 </Col>
               </FormGroup>
               <FormGroup controlId="formControlsSelect">
@@ -75,7 +75,7 @@ export default class LogoEdit extends Component {
                   Active
                 </Col>
                 <Col sm={10}>
-                  <FormControl componentClass="select" placeholder="select"  defaultValue={data.logo.active}  ref={(input) => this.formActive = input} >
+                  <FormControl componentClass="select" placeholder="select" defaultValue={data.logo.active} ref={(input) => this.formActive = input} >
                     <option value="1">On</option>
                     <option value="0">Off</option>
                   </FormControl>
@@ -86,9 +86,9 @@ export default class LogoEdit extends Component {
                   Categories
                 </Col>
                 <Col sm={10}>
-                  <FormControl componentClass="select" placeholder="select"  defaultValue={data.category} ref={(input) => this.formCategories = input} >
-                    {this.props.data.categories.map(category=>{
-                        return (<option value={category._id}>{category.name}</option>)
+                  <FormControl componentClass="select" placeholder="select" defaultValue={data.category} ref={(input) => this.formCategories = input} >
+                    {this.props.data.categories.map(category => {
+                      return (<option value={category._id}>{category.name}</option>)
                     })}
                   </FormControl>
                 </Col>
@@ -99,8 +99,8 @@ export default class LogoEdit extends Component {
                 </Col>
                 <Col sm={10}>
                   <FormControl componentClass="select" placeholder="select" defaultValue={data.style} ref={(input) => this.formStyles = input} >
-                    {this.props.data.styles.map(style=>{
-                        return (<option value={style._id}>{style.name}</option>)
+                    {this.props.data.styles.map(style => {
+                      return (<option value={style._id}>{style.name}</option>)
                     })}
                   </FormControl>
                 </Col>
@@ -111,8 +111,8 @@ export default class LogoEdit extends Component {
                 </Col>
                 <Col sm={10}>
                   <FormControl componentClass="select" placeholder="select" defaultValue={data.type} ref={(input) => this.formTypes = input} >
-                    {this.props.data.types.map(type=>{
-                        return (<option value={type._id}>{type.name}</option>)
+                    {this.props.data.types.map(type => {
+                      return (<option value={type._id}>{type.name}</option>)
                     })}
                   </FormControl>
                 </Col>
@@ -123,13 +123,13 @@ export default class LogoEdit extends Component {
                 </Col>
                 <Col sm={10}>
                   <FormControl componentClass="select" placeholder="select" defaultValue={data.tag} ref={(input) => this.formTags = input} >
-                    {this.props.data.tags.map(tag=>{
-                        return (<option value={tag._id}>{tag.name}</option>)
+                    {this.props.data.tags.map(tag => {
+                      return (<option value={tag._id}>{tag.name}</option>)
                     })}
                   </FormControl>
                 </Col>
               </FormGroup>
-              
+
               <FormGroup controlId="formName">
                 <Col componentClass={ControlLabel} sm={2}>
                   Name
@@ -146,9 +146,7 @@ export default class LogoEdit extends Component {
                   <FormControl type="text" placeholder="Education, school, trainning" defaultValue={data.logo.keyword} ref={(input) => this.formKeyword = input} />
                 </Col>
               </FormGroup>
-              <FormGroup>
-                <LogoWorkspace />
-              </FormGroup>
+              <LogoWorkspace logoData={data.logo.logoData} />
               <FormGroup controlId="formSubmit">
                 <Col smOffset={2} sm={10}>
                   <Button type="submit">

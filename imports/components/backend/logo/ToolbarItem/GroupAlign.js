@@ -9,7 +9,7 @@ export default class GroupAlign extends React.Component {
     }
     render() {
         return (
-            <Button.Group size={'huge'}>
+            <Button.Group size={'medium'}>
                 <Button icon='align left' compact data-font="left" onClick={this.handleAction} />
                 <Button icon='align center' compact data-font="center" onClick={this.handleAction} />
                 <Button icon='align right' compact data-font="right" onClick={this.handleAction} />

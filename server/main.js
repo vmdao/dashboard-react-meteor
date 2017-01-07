@@ -21,7 +21,6 @@ Meteor.startup(() => {
   }
 
   if (Meteor.isServer) {
-    console.log('server ' + Meteor.isServer)
     Meteor.publish("userStatus", function () {
       return Meteor.users.find({ "status.online": true });
     });

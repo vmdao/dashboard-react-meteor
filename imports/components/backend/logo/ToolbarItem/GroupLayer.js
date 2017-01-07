@@ -11,7 +11,7 @@ export default class GroupLayer extends React.Component {
     }
     render() {
         return (
-            <Button.Group size={'huge'}>
+            <Button.Group size={'medium'}>
                 <Button icon='long arrow down' compact data-font="forward" onClick={this.handleAction} />
                 <Button icon='long arrow up' compact data-font="back" onClick={this.handleAction} />
             </Button.Group >

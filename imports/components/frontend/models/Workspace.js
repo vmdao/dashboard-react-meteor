@@ -335,7 +335,7 @@ class Workspace extends Component {
     constructor(props) {
         super(props);
         this.state = { isCollapse: true, searchText: '', };
-       
+
         this.handleUserInput = this.handleUserInput.bind(this);
         this.typewatch = function () {
             var timer = 0;
@@ -345,10 +345,11 @@ class Workspace extends Component {
             };
         } ();
     }
-   
+
     handleUserInput(searchText, suggest) {
-        this.setState({ searchText: searchText, type: suggest, isCollapse:false });
+        this.setState({ searchText: searchText, type: suggest, isCollapse: false });
     }
+
     shouldComponentUpdate(nextProps, nextState) {
         this.typewatch(this._ajaxGetData, 500);
         return true;
@@ -374,6 +375,7 @@ class Workspace extends Component {
     }
 
     render() {
+        let {data} = this.props || [];
         return (
             <div>
                 <div className="container-fluid landing-header ">
@@ -389,7 +391,7 @@ class Workspace extends Component {
                             type={this.props.type}
                             searchText={this.props.searchText}
                             onUserInput={this.props.onUserInput}
-                            onClick = {this.handleUserInput} />
+                            onClick={this.handleUserInput} />
                         <div className="wrap-suggest">
                             <div className="container-mason">
                                 <div className="container-mason-row">
@@ -414,13 +416,11 @@ class Workspace extends Component {
                 </div>
                 <div>
                     <div className="container container-wrap-logo">
-                        {LOGO.map((value, index) => {
-                            return <Logo
-                                key={index}
-                                events={emitter}
-                                data={value}
-                                searchText={this.props.searchText} />
-                        })}
+                        <Logo
+                            events={emitter}
+                            data={data}
+                            searchText={this.props.searchText} />
+
                         <div className="clonePreview"></div>
                     </div>
                 </div>
